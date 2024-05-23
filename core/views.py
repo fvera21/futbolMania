@@ -16,8 +16,6 @@ def registro(request):
             usuario = formulario.save()
             user = authenticate(username=usuario.username, password=formulario.cleaned_data["password1"])
             login(request, user)
-            grupo = Group.objects.get(name='cliente')
-            user.groups.add(grupo)
             return redirect("index")
         else:
             data["form"] = formulario
