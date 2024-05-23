@@ -1,10 +1,7 @@
-from django.urls import path, include
-from.views import *
-from rest_framework import routers
+from django.urls import path
+from .views import index, registro
 
-
-## SE VAN A CREAR TODAS LAS URLS
 urlpatterns = [
-    #RUTAS
     path('', index, name="index"),
+    path('registro/', registro, name="registro"),
 ]
