@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-05-2024 a las 21:04:31
+-- Tiempo de generación: 30-05-2024 a las 21:22:22
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `futbolmania`
 --
+CREATE DATABASE IF NOT EXISTS `futbolmania` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `futbolmania`;
 
 -- --------------------------------------------------------
 
@@ -116,7 +118,7 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$216000$fzoWLETWc0P6$1CZR4glQiHCLAMJeg6Iweot1iVEx/AeV5/w2OrljRKE=', '2024-05-23 18:56:05.210585', 1, 'admin', '', '', 'fr.verag@duocuc.cl', 1, 1, '2024-05-23 18:46:39.975027'),
+(1, 'pbkdf2_sha256$216000$fzoWLETWc0P6$1CZR4glQiHCLAMJeg6Iweot1iVEx/AeV5/w2OrljRKE=', '2024-05-30 19:21:27.791350', 1, 'admin', '', '', 'fr.verag@duocuc.cl', 1, 1, '2024-05-23 18:46:39.975027'),
 (2, 'pbkdf2_sha256$216000$dJpBsTJjtLVN$1a+5CNj38rItKFhIYRg/emdZggAZethFMCG3DHcC5zs=', '2024-05-23 18:49:36.079071', 0, 'nacho', '', '', '', 0, 1, '2024-05-23 18:48:47.793812'),
 (3, 'pbkdf2_sha256$216000$KdqfiRMkyG9x$gWj6yGB13RE6SABg0R/FfmOW/q7Ibk2ErxiGTxsQTA0=', '2024-05-23 18:55:53.047114', 0, 'vera', '', '', 'fr.vera@gmail.com', 0, 1, '2024-05-23 18:55:52.551075');
 
@@ -252,6 +254,7 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('na5c2o1aoz3tlcljcmkzdm3cfr2youwt', '.eJxVjDsOwjAQBe_iGll2kvWHkj5nsNZrLw4gR4qTCnF3EikFtG_mzVsE3NYStpaXMCVxFVpcfreI9Mz1AOmB9T5Lmuu6TFEeijxpk-Oc8ut2un-Bgq3sb2YwENlCdt7Z6B31GRQjDUqlrienUVkFXgN1xGgGRXsc2JCBHJHF5wvtUTiT:1sClL5:cGPNuVLBMrHfYmFa9eUou7k_GC7A4DbsFqS_ZHXoRIY', '2024-06-13 19:21:27.795339'),
 ('oi5txy4c4m99iklf3zignrhxlo1zj7ze', '.eJxVjDsOwjAQBe_iGll2kvWHkj5nsNZrLw4gR4qTCnF3EikFtG_mzVsE3NYStpaXMCVxFVpcfreI9Mz1AOmB9T5Lmuu6TFEeijxpk-Oc8ut2un-Bgq3sb2YwENlCdt7Z6B31GRQjDUqlrienUVkFXgN1xGgGRXsc2JCBHJHF5wvtUTiT:1sADbh:ZfoSgkQQYNT-0zYIL_d57TwtLzZBRfm5XIao1EYNa9s', '2024-06-06 18:56:05.216585');
 
 --
