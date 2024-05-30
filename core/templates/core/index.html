@@ -1,18 +1,58 @@
 {% extends 'core/base.html' %}
-{% load static%}
+{% load static %}
 
 {% block css %}
-  
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
 {% endblock %}
 
 <!-- INICIO CONTENIDO-->
 {% block contenido %}
-
-
-
-
+  <div class="container-lg">
+    <h1 class="text-center my-4">Orden de Compra</h1>
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <form id="productoForm" action="" method="post">
+          <div id="productoDiv" class="mb-3">
+            <div class="row">
+              <div class="col">
+                <label for="producto" class="form-label">Producto:</label>
+                <input type="text" class="form-control" id="producto" name="producto">
+              </div>
+              <div class="col">
+                <label for="cantidad" class="form-label">Cantidad:</label>
+                <input type="number" class="form-control" id="cantidad" name="cantidad">
+              </div>
+              <div class="col">
+                <label for="precio" class="form-label">Precio:</label>
+                <input type="number" class="form-control" id="precio" name="precio" step="0.01">
+              </div>
+            </div>
+          </div>
+          <button type="button" id="addRow" class="btn btn-primary mb-3">Agregar producto</button>
+          <div class="text-start">
+            <button type="submit" class="btn btn-success">Enviar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 {% endblock %}
 <!-- FIN CONTENIDO -->
 {% block js %}
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      var i=1;
+      $('#addRow').click(function(){
+        i++;
+        $('#productoDiv').append('<div id="row'+i+'" class="mb-3"><div class="row"><div class="col"><label for="producto" class="form-label">Producto:</label><input type="text" class="form-control" id="producto" name="producto"></div><div class="col"><label for="cantidad" class="form-label">Cantidad:</label><input type="number" class="form-control" id="cantidad" name="cantidad"></div><div class="col"><label for="precio" class="form-label">Precio:</label><input type="number" class="form-control" id="precio" name="precio" step="0.01"></div></div><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div>');
+      });
+
+      $(document).on('click', '.btn_remove', function(){
+        var button_id = $(this).attr("id"); 
+        $('#row'+button_id+'').remove();
+      });
+    });
+  </script>
 {% endblock %}
