@@ -42,11 +42,14 @@
 {% endblock %}
 
 {% block contenido %}
-  <div class="container-lg">
-    <h1 class="text-center my-4">Formulario de Empresa</h1>
+<div class="container-lg">
+    <h1 class="text-center my-4">Orden de Compra</h1>
     <div class="row justify-content-center">
       <div class="col-lg-6">
-        <form class="empresa-form">
+        <form id="combinedForm" action="" method="post">
+          <label for="nombreEmpresa">Nombre de la empresa:</label><br>
+          <input class="empresa-input" type="text" id="nombreEmpresa" name="nombreEmpresa"><br>
+  
           <label for="nombreEmpresa">Nombre de la empresa:</label><br>
           <input class="empresa-input" type="text" id="nombreEmpresa" name="nombreEmpresa"><br>
 
@@ -67,44 +70,23 @@
 
           <label for="rutCompra">RUT de compra:</label><br>
           <input class="empresa-input" type="text" id="rutCompra" name="rutCompra"><br>
-
-          <input class="empresa-submit" type="submit" value="Enviar">
-        </form>
-      </div>
-    </div>
-    <h1 class="text-center my-4">Orden de Compra</h1>
-    <div class="row justify-content-center">
-      <div class="col-lg-6">
-        <form id="productoForm" action="" method="post">
+  
           <div id="productoDiv" class="mb-3">
-            <div class="row">
-              <div class="col">
-                <label for="producto" class="form-label">Producto:</label>
-                <input type="text" class="form-control" id="producto" name="producto">
-              </div>
-              <div class="col">
-                <label for="cantidad" class="form-label">Cantidad:</label>
-                <input type="number" class="form-control" id="cantidad" name="cantidad">
-              </div>
-              <div class="col">
-                <label for="precio" class="form-label">Precio:</label>
-                <input type="number" class="form-control" id="precio" name="precio" step="0.01">
-              </div>
-            </div>
+            <!-- Aquí va el código para los campos de producto, cantidad y precio -->
           </div>
           <button type="button" id="addRow" class="btn btn-primary mb-3">Agregar producto</button>
+          <div id="subtotalDiv" class="mb-3">
+            <label for="subtotal" class="form-label">Subtotal:</label>
+            <input type="number" class="form-control" id="subtotal" name="subtotal" readonly>
+          </div>
+          <div id="ivaDiv" class="mb-3">
+            <label for="iva" class="form-label">IVA (19%)</label>
+          </div>
+          <div id="totalDiv" class="mb-3">
+            <label for="total" class="form-label">Total:</label>
+            <input type="number" class="form-control" id="total" name="total" readonly>
+          </div>
           <div class="text-start">
-            <div id="subtotalDiv" class="mb-3">
-              <label for="subtotal" class="form-label">Subtotal:</label>
-              <input type="number" class="form-control" id="subtotal" name="subtotal" readonly>
-            </div>
-            <div id="ivaDiv" class="mb-3">
-                <label for="iva" class="form-label">IVA (19%)</label>
-            </div>
-            <div id="totalDiv" class="mb-3">
-                <label for="total" class="form-label">Total:</label>
-                <input type="number" class="form-control" id="total" name="total" readonly>
-            </div>
             <button type="submit" class="btn btn-success">Enviar</button>
           </div>
         </form>
