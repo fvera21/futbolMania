@@ -143,13 +143,13 @@
     });
 
     function recalculateSubtotal() {
-      var subtotal = 0;
-      $('input[name="precio"]').each(function(index, element) {
+    var subtotal = 0;
+    $('input[name="precio"]').each(function(index, element) {
         var precio = parseFloat($(element).val()) || 0;
         var cantidad = parseFloat($('input[name="cantidad"]').eq(index).val()) || 0;
         subtotal += precio * cantidad;
-      });
-      $('#subtotal').val(subtotal.toFixed(2));
+    });
+    $('#subtotal').val(Math.floor(subtotal)); // Redondeamos hacia abajo para eliminar los decimales
     }
   });
   </script>
