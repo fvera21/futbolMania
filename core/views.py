@@ -20,3 +20,7 @@ def registro(request):
         else:
             data["form"] = formulario
     return render(request, 'core/registro.html', data)
+
+
+def facturas(request):
+    return render(request, 'core/facturas.html')
