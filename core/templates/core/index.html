@@ -3,11 +3,75 @@
 
 {% block css %}
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .empresa-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f6f6f6;
+        font-family: Arial, sans-serif;
+    }
+    .empresa-form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
+    }
+    .empresa-input[type="text"], .empresa-input[type="tel"], .empresa-input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
+    .empresa-submit[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    .empresa-submit[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style>
 {% endblock %}
 
-<!-- INICIO CONTENIDO-->
 {% block contenido %}
   <div class="container-lg">
+    <h1 class="text-center my-4">Formulario de Empresa</h1>
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <form class="empresa-form">
+          <label for="nombreEmpresa">Nombre de la empresa:</label><br>
+          <input class="empresa-input" type="text" id="nombreEmpresa" name="nombreEmpresa"><br>
+
+          <label for="direccion">Dirección:</label><br>
+          <input class="empresa-input" type="text" id="direccion" name="direccion"><br>
+
+          <label for="telefono">Teléfono:</label><br>
+          <input class="empresa-input" type="tel" id="telefono" name="telefono"><br>
+
+          <label for="comuna">Comuna:</label><br>
+          <input class="empresa-input" type="text" id="comuna" name="comuna"><br>
+
+          <label for="region">Región:</label><br>
+          <input class="empresa-input" type="text" id="region" name="region"><br>
+
+          <label for="correo">Correo:</label><br>
+          <input class="empresa-input" type="email" id="correo" name="correo"><br>
+
+          <label for="rutCompra">RUT de compra:</label><br>
+          <input class="empresa-input" type="text" id="rutCompra" name="rutCompra"><br>
+
+          <input class="empresa-submit" type="submit" value="Enviar">
+        </form>
+      </div>
+    </div>
     <h1 class="text-center my-4">Orden de Compra</h1>
     <div class="row justify-content-center">
       <div class="col-lg-6">
@@ -37,7 +101,7 @@
     </div>
   </div>
 {% endblock %}
-<!-- FIN CONTENIDO -->
+
 {% block js %}
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -48,7 +112,6 @@
         i++;
         $('#productoDiv').append('<div id="row'+i+'" class="mb-3"><div class="row"><div class="col"><label for="producto" class="form-label">Producto:</label><input type="text" class="form-control" id="producto" name="producto"></div><div class="col"><label for="cantidad" class="form-label">Cantidad:</label><input type="number" class="form-control" id="cantidad" name="cantidad"></div><div class="col"><label for="precio" class="form-label">Precio:</label><input type="number" class="form-control" id="precio" name="precio" step="0.01"></div></div><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div>');
       });
-
       $(document).on('click', '.btn_remove', function(){
         var button_id = $(this).attr("id"); 
         $('#row'+button_id+'').remove();
