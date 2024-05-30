@@ -98,6 +98,13 @@
               <label for="subtotal" class="form-label">Subtotal:</label>
               <input type="number" class="form-control" id="subtotal" name="subtotal" readonly>
             </div>
+            <div id="ivaDiv" class="mb-3">
+                <label for="iva" class="form-label">IVA (19%)</label>
+            </div>
+            <div id="totalDiv" class="mb-3">
+                <label for="total" class="form-label">Total:</label>
+                <input type="number" class="form-control" id="total" name="total" readonly>
+            </div>
             <button type="submit" class="btn btn-success">Enviar</button>
           </div>
         </form>
@@ -149,7 +156,15 @@
         var cantidad = parseFloat($('input[name="cantidad"]').eq(index).val()) || 0;
         subtotal += precio * cantidad;
     });
-    $('#subtotal').val(Math.floor(subtotal)); // Redondeamos hacia abajo para eliminar los decimales
+    $('#subtotal').val(Math.floor(subtotal));
+
+    // Calcula el IVA como el 19% del subtotal
+    var iva = subtotal * 0.19;
+    $('#iva').val(Math.floor(iva));
+
+    // Calcula el total como la suma del subtotal y el IVA
+    var total = subtotal + iva;
+    $('#total').val(Math.floor(total));
     }
   });
   </script>
