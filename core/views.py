@@ -23,3 +23,6 @@ def registro(request):
 
 def ordenCompra(request):
     return render(request, 'core/ordenCompra.html')
+
+def facturas(request):
+    return render(request, 'core/facturas.html')
