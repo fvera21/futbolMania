@@ -43,64 +43,9 @@
 
 {% block contenido %}
   <div class="container-lg">
-    <h1 class="text-center my-4">Formulario de Empresa</h1>
+    <h1 class="text-center my-4">Bienvenido!</h1>
     <div class="row justify-content-center">
       <div class="col-lg-6">
-        <form class="empresa-form">
-          <label for="nombreEmpresa">Nombre de la empresa:</label><br>
-          <input class="empresa-input" type="text" id="nombreEmpresa" name="nombreEmpresa"><br>
-
-          <label for="direccion">Dirección:</label><br>
-          <input class="empresa-input" type="text" id="direccion" name="direccion"><br>
-
-          <label for="telefono">Teléfono:</label><br>
-          <input class="empresa-input" type="tel" id="telefono" name="telefono"><br>
-
-          <label for="comuna">Comuna:</label><br>
-          <input class="empresa-input" type="text" id="comuna" name="comuna"><br>
-
-          <label for="region">Región:</label><br>
-          <input class="empresa-input" type="text" id="region" name="region"><br>
-
-          <label for="correo">Correo:</label><br>
-          <input class="empresa-input" type="email" id="correo" name="correo"><br>
-
-          <label for="rutCompra">RUT de compra:</label><br>
-          <input class="empresa-input" type="text" id="rutCompra" name="rutCompra"><br>
-
-          <input class="empresa-submit" type="submit" value="Enviar">
-        </form>
-      </div>
-    </div>
-    <h1 class="text-center my-4">Orden de Compra</h1>
-    <div class="row justify-content-center">
-      <div class="col-lg-6">
-        <form id="productoForm" action="" method="post">
-          <div id="productoDiv" class="mb-3">
-            <div class="row">
-              <div class="col">
-                <label for="producto" class="form-label">Producto:</label>
-                <input type="text" class="form-control" id="producto" name="producto">
-              </div>
-              <div class="col">
-                <label for="cantidad" class="form-label">Cantidad:</label>
-                <input type="number" class="form-control" id="cantidad" name="cantidad">
-              </div>
-              <div class="col">
-                <label for="precio" class="form-label">Precio:</label>
-                <input type="number" class="form-control" id="precio" name="precio" step="0.01">
-              </div>
-            </div>
-          </div>
-          <button type="button" id="addRow" class="btn btn-primary mb-3">Agregar producto</button>
-          <div class="text-start">
-            <div id="subtotalDiv" class="mb-3">
-              <label for="subtotal" class="form-label">Subtotal:</label>
-              <input type="number" class="form-control" id="subtotal" name="subtotal" readonly>
-            </div>
-            <button type="submit" class="btn btn-success">Enviar</button>
-          </div>
-        </form>
       </div>
     </div>
   </div>
@@ -109,48 +54,4 @@
 {% block js %}
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script>
-  $(document).ready(function(){
-    var i=1;
-    $('#addRow').off('click').click(function(){
-      i++;
-      $('#productoDiv').append('<div id="row'+i+'" class="mb-3"><div class="row"><div class="col"><label for="producto" class="form-label">Producto:</label><input type="text" class="form-control" id="producto" name="producto"></div><div class="col"><label for="cantidad" class="form-label">Cantidad:</label><input type="number" class="form-control" id="cantidad" name="cantidad"></div><div class="col"><label for="precio" class="form-label">Precio:</label><input type="number" class="form-control" id="precio" name="precio" step="0.01"></div></div><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div>');
-      recalculateSubtotal();
-    });
-
-    $(document).on('click', '.btn_remove', function(){
-      var button_id = $(this).attr("id"); 
-      $('#row'+button_id+'').remove();
-    });
-  });
-
-  $(document).ready(function(){
-    var i=1;
-    $('#addRow').click(function(){
-      i++;
-      $('#productoDiv').append('<div id="row'+i+'" class="mb-3"><div class="row"><div class="col"><label for="producto" class="form-label">Producto:</label><input type="text" class="form-control" id="producto" name="producto"></div><div class="col"><label for="cantidad" class="form-label">Cantidad:</label><input type="number" class="form-control" id="cantidad" name="cantidad"></div><div class="col"><label for="precio" class="form-label">Precio:</label><input type="number" class="form-control" id="precio" name="precio" step="0.01"></div></div><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div>');
-      recalculateSubtotal();
-    });
-
-    $(document).on('click', '.btn_remove', function(){
-      var button_id = $(this).attr("id"); 
-      $('#row'+button_id+'').remove();
-      recalculateSubtotal();
-    });
-
-    $(document).on('change', 'input[name="precio"], input[name="cantidad"]', function() {
-      recalculateSubtotal();
-    });
-
-    function recalculateSubtotal() {
-      var subtotal = 0;
-      $('input[name="precio"]').each(function(index, element) {
-        var precio = parseFloat($(element).val()) || 0;
-        var cantidad = parseFloat($('input[name="cantidad"]').eq(index).val()) || 0;
-        subtotal += precio * cantidad;
-      });
-      $('#subtotal').val(subtotal.toFixed(2));
-    }
-  });
-  </script>
 {% endblock %}

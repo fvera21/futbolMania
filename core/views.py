@@ -20,3 +20,6 @@ def registro(request):
         else:
             data["form"] = formulario
     return render(request, 'core/registro.html', data)
+
+def ordenCompra(request):
+    return render(request, 'core/ordenCompra.html')
