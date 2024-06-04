@@ -61,7 +61,7 @@
           <input class="empresa-input" type="email" id="correo" name="correo"><br>
 
           <label for="correo">Sitio Web:</label><br>
-          <input class="empresa-input" type="email" id="web" name="web"><br>
+          <input class="empresa-input" type="text" id="web" name="web"><br>
 
           <h3 class="my-4">Vendedor</h3>
           <label for="nombreEmpresa">Nombre de la empresa:</label><br>
@@ -77,7 +77,7 @@
           <input class="empresa-input" type="email" id="correov" name="correov"><br>
 
           <label for="correo">Sitio Web:</label><br>
-          <input class="empresa-input" type="email" id="web" name="web"><br>
+          <input class="empresa-input" type="text" id="webv" name="webv"><br>
 
           <h3 class="my-4">Cliente</h3>
           <label for="nombreEmpresa">Nombre del cliente:</label><br>
@@ -110,20 +110,6 @@
   
           <h3 class="my-4">Productos</h3>
           <div id="productoDiv" class="mb-3">
-            <div class="row">
-              <div class="col">
-                <label for="producto" class="form-label">Producto:</label>
-                <input type="text" class="form-control" id="producto" name="producto">
-              </div>
-              <div class="col">
-                <label for="cantidad" class="form-label">Cantidad:</label>
-                <input type="number" class="form-control" id="cantidad" name="cantidad">
-              </div>
-              <div class="col">
-                <label for="precio" class="form-label">Precio:</label>
-                <input type="number" class="form-control" id="precio" name="precio" step="0.01">
-              </div>
-            </div>
           </div>
           <button type="button" id="addRow" class="btn btn-primary mb-3">Agregar producto</button>
 
@@ -134,6 +120,7 @@
           </div>
           <div id="ivaDiv" class="mb-3">
             <label for="iva" class="form-label">IVA (19%)</label>
+            <input type="number" class="form-control" id="iva" name="iva" readonly>
           </div>
           <div id="totalDiv" class="mb-3">
             <label for="total" class="form-label">Total:</label>
@@ -153,55 +140,42 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
-  $(document).ready(function(){
+$(document).ready(function(){
     var i=1;
+
     $('#addRow').off('click').click(function(){
-      i++;
-      $('#productoDiv').append('<div id="row'+i+'" class="mb-3"><div class="row"><div class="col"><label for="producto" class="form-label">Producto:</label><input type="text" class="form-control" id="producto" name="producto"></div><div class="col"><label for="cantidad" class="form-label">Cantidad:</label><input type="number" class="form-control" id="cantidad" name="cantidad"></div><div class="col"><label for="precio" class="form-label">Precio:</label><input type="number" class="form-control" id="precio" name="precio" step="0.01"></div></div><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div>');
-      recalculateSubtotal();
+        i++;
+        $('#productoDiv').append('<div id="row'+i+'" class="mb-3"><div class="row"><div class="col"><label for="producto" class="form-label">Producto:</label><input type="text" class="form-control" id="producto" name="producto"></div><div class="col"><label for="cantidad" class="form-label">Cantidad:</label><input type="number" class="form-control" id="cantidad" name="cantidad"></div><div class="col"><label for="precio" class="form-label">Precio:</label><input type="number" class="form-control" id="precio" name="precio" step="0.01"></div></div><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div>');
+        recalculateSubtotal();
     });
 
     $(document).on('click', '.btn_remove', function(){
-      var button_id = $(this).attr("id"); 
-      $('#row'+button_id+'').remove();
-    });
-  });
-
-  $(document).ready(function(){
-    var i=1;
-    $('#addRow').click(function(){
-      i++;
-      $('#productoDiv').append('<div id="row'+i+'" class="mb-3"><div class="row"><div class="col"><label for="producto" class="form-label">Producto:</label><input type="text" class="form-control" id="producto" name="producto"></div><div class="col"><label for="cantidad" class="form-label">Cantidad:</label><input type="number" class="form-control" id="cantidad" name="cantidad"></div><div class="col"><label for="precio" class="form-label">Precio:</label><input type="number" class="form-control" id="precio" name="precio" step="0.01"></div></div><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div>');
-      recalculateSubtotal();
-    });
-
-    $(document).on('click', '.btn_remove', function(){
-      var button_id = $(this).attr("id"); 
-      $('#row'+button_id+'').remove();
-      recalculateSubtotal();
+        var button_id = $(this).attr("id"); 
+        $('#row'+button_id+'').remove();
+        recalculateSubtotal();
     });
 
     $(document).on('change', 'input[name="precio"], input[name="cantidad"]', function() {
-      recalculateSubtotal();
+        recalculateSubtotal();
     });
 
     function recalculateSubtotal() {
-    var subtotal = 0;
-    $('input[name="precio"]').each(function(index, element) {
-        var precio = parseFloat($(element).val()) || 0;
-        var cantidad = parseFloat($('input[name="cantidad"]').eq(index).val()) || 0;
-        subtotal += precio * cantidad;
-    });
-    $('#subtotal').val(Math.floor(subtotal));
+        var subtotal = 0;
+        $('input[name="precio"]').each(function(index, element) {
+            var precio = parseFloat($(element).val()) || 0;
+            var cantidad = parseFloat($('input[name="cantidad"]').eq(index).val()) || 0;
+            subtotal += precio * cantidad;
+        });
+        $('#subtotal').val(Math.floor(subtotal));
 
-    // Calcula el IVA como el 19% del subtotal
-    var iva = subtotal * 0.19;
-    $('#iva').val(Math.floor(iva));
+        // Calcula el IVA como el 19% del subtotal
+        var iva = subtotal * 0.19;
+        $('#iva').val(Math.floor(iva));
 
-    // Calcula el total como la suma del subtotal y el IVA
-    var total = subtotal + iva;
-    $('#total').val(Math.floor(total));
+        // Calcula el total como la suma del subtotal y el IVA
+        var total = subtotal + iva;
+        $('#total').val(Math.round(total));
     }
-  });
+});
   </script>
 {% endblock %}
