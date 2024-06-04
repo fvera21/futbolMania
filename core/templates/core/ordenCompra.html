@@ -47,9 +47,7 @@
     <div class="row justify-content-center">
       <div class="col-lg-6">
         <form id="combinedForm" action="" method="post">
-          <label for="nombreEmpresa">Nombre de la empresa:</label><br>
-          <input class="empresa-input" type="text" id="nombreEmpresa" name="nombreEmpresa"><br>
-  
+          <h3 class="my-4">Empresa</h3>
           <label for="nombreEmpresa">Nombre de la empresa:</label><br>
           <input class="empresa-input" type="text" id="nombreEmpresa" name="nombreEmpresa"><br>
 
@@ -59,22 +57,77 @@
           <label for="telefono">Teléfono:</label><br>
           <input class="empresa-input" type="tel" id="telefono" name="telefono"><br>
 
-          <label for="comuna">Comuna:</label><br>
-          <input class="empresa-input" type="text" id="comuna" name="comuna"><br>
-
-          <label for="region">Región:</label><br>
-          <input class="empresa-input" type="text" id="region" name="region"><br>
-
           <label for="correo">Correo:</label><br>
           <input class="empresa-input" type="email" id="correo" name="correo"><br>
 
-          <label for="rutCompra">RUT de compra:</label><br>
-          <input class="empresa-input" type="text" id="rutCompra" name="rutCompra"><br>
+          <label for="correo">Sitio Web:</label><br>
+          <input class="empresa-input" type="email" id="web" name="web"><br>
+
+          <h3 class="my-4">Vendedor</h3>
+          <label for="nombreEmpresa">Nombre de la empresa:</label><br>
+          <input class="empresa-input" type="text" id="nombreEmpresav" name="nombreEmpresav"><br>
+
+          <label for="direccion">Dirección:</label><br>
+          <input class="empresa-input" type="text" id="direccionv" name="direccionv"><br>
+
+          <label for="telefono">Teléfono:</label><br>
+          <input class="empresa-input" type="tel" id="telefonov" name="telefonov"><br>
+
+          <label for="correo">Correo:</label><br>
+          <input class="empresa-input" type="email" id="correov" name="correov"><br>
+
+          <label for="correo">Sitio Web:</label><br>
+          <input class="empresa-input" type="email" id="web" name="web"><br>
+
+          <h3 class="my-4">Cliente</h3>
+          <label for="nombreEmpresa">Nombre del cliente:</label><br>
+          <input class="empresa-input" type="text" id="nombrecliente" name="nombrecliente"><br>
+
+          <label for="nombreEmpresa">Nombre de la empresa:</label><br>
+          <input class="empresa-input" type="text" id="nombreEmpresac" name="nombreEmpresac"><br>
+
+          <label for="direccion">Dirección:</label><br>
+          <input class="empresa-input" type="text" id="direccionc" name="direccionc"><br>
+
+          <label for="telefono">Teléfono:</label><br>
+          <input class="empresa-input" type="tel" id="telefonoc" name="telefonoc"><br>
+
+          <label for="correo">Correo:</label><br>
+          <input class="empresa-input" type="email" id="correoc" name="correoc"><br>
+
+          <h3 class="my-4">Enviar A:</h3>
+          <label for="direccion">Metodo de envío:</label><br>
+          <input class="empresa-input" type="text" id="metodoenvio" name="metodoenvio"><br>
+
+          <label for="direccion">Dirección:</label><br>
+          <input class="empresa-input" type="text" id="direccionenvio" name="direccionenvio"><br>
+
+          <label for="direccion">Condiciones de envío:</label><br>
+          <input class="empresa-input" type="text" id="condicionesenvio" name="condicionesenvio"><br>
+
+          <label for="direccion">Costo de envío:</label><br>
+          <input class="empresa-input" type="text" id="costoenvio" name="costoenvio"><br>
   
+          <h3 class="my-4">Productos</h3>
           <div id="productoDiv" class="mb-3">
-            <!-- Aquí va el código para los campos de producto, cantidad y precio -->
+            <div class="row">
+              <div class="col">
+                <label for="producto" class="form-label">Producto:</label>
+                <input type="text" class="form-control" id="producto" name="producto">
+              </div>
+              <div class="col">
+                <label for="cantidad" class="form-label">Cantidad:</label>
+                <input type="number" class="form-control" id="cantidad" name="cantidad">
+              </div>
+              <div class="col">
+                <label for="precio" class="form-label">Precio:</label>
+                <input type="number" class="form-control" id="precio" name="precio" step="0.01">
+              </div>
+            </div>
           </div>
           <button type="button" id="addRow" class="btn btn-primary mb-3">Agregar producto</button>
+
+          <h3 class="my-4">Detalle</h3>
           <div id="subtotalDiv" class="mb-3">
             <label for="subtotal" class="form-label">Subtotal:</label>
             <input type="number" class="form-control" id="subtotal" name="subtotal" readonly>
@@ -93,6 +146,7 @@
       </div>
     </div>
   </div>
+  <br><br>
 {% endblock %}
 
 {% block js %}
