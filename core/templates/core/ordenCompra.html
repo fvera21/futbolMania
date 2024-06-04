@@ -1,5 +1,7 @@
 {% extends 'core/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
+
 
 {% block css %}
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
@@ -47,66 +49,18 @@
     <div class="row justify-content-center">
       <div class="col-lg-6">
         <form id="combinedForm" action="" method="post">
+          {% csrf_token %}
           <h3 class="my-4">Empresa</h3>
-          <label for="nombreEmpresa">Nombre de la empresa:</label><br>
-          <input class="empresa-input" type="text" id="nombreEmpresa" name="nombreEmpresa"><br>
-
-          <label for="direccion">Dirección:</label><br>
-          <input class="empresa-input" type="text" id="direccion" name="direccion"><br>
-
-          <label for="telefono">Teléfono:</label><br>
-          <input class="empresa-input" type="tel" id="telefono" name="telefono"><br>
-
-          <label for="correo">Correo:</label><br>
-          <input class="empresa-input" type="email" id="correo" name="correo"><br>
-
-          <label for="correo">Sitio Web:</label><br>
-          <input class="empresa-input" type="text" id="web" name="web"><br>
+          {{ empresaForm | crispy }}
 
           <h3 class="my-4">Vendedor</h3>
-          <label for="nombreEmpresa">Nombre de la empresa:</label><br>
-          <input class="empresa-input" type="text" id="nombreEmpresav" name="nombreEmpresav"><br>
-
-          <label for="direccion">Dirección:</label><br>
-          <input class="empresa-input" type="text" id="direccionv" name="direccionv"><br>
-
-          <label for="telefono">Teléfono:</label><br>
-          <input class="empresa-input" type="tel" id="telefonov" name="telefonov"><br>
-
-          <label for="correo">Correo:</label><br>
-          <input class="empresa-input" type="email" id="correov" name="correov"><br>
-
-          <label for="correo">Sitio Web:</label><br>
-          <input class="empresa-input" type="text" id="webv" name="webv"><br>
+          {{ vendedorForm | crispy }}
 
           <h3 class="my-4">Cliente</h3>
-          <label for="nombreEmpresa">Nombre del cliente:</label><br>
-          <input class="empresa-input" type="text" id="nombrecliente" name="nombrecliente"><br>
-
-          <label for="nombreEmpresa">Nombre de la empresa:</label><br>
-          <input class="empresa-input" type="text" id="nombreEmpresac" name="nombreEmpresac"><br>
-
-          <label for="direccion">Dirección:</label><br>
-          <input class="empresa-input" type="text" id="direccionc" name="direccionc"><br>
-
-          <label for="telefono">Teléfono:</label><br>
-          <input class="empresa-input" type="tel" id="telefonoc" name="telefonoc"><br>
-
-          <label for="correo">Correo:</label><br>
-          <input class="empresa-input" type="email" id="correoc" name="correoc"><br>
+          {{ clienteForm | crispy }}
 
           <h3 class="my-4">Enviar A:</h3>
-          <label for="direccion">Metodo de envío:</label><br>
-          <input class="empresa-input" type="text" id="metodoenvio" name="metodoenvio"><br>
-
-          <label for="direccion">Dirección:</label><br>
-          <input class="empresa-input" type="text" id="direccionenvio" name="direccionenvio"><br>
-
-          <label for="direccion">Condiciones de envío:</label><br>
-          <input class="empresa-input" type="text" id="condicionesenvio" name="condicionesenvio"><br>
-
-          <label for="direccion">Costo de envío:</label><br>
-          <input class="empresa-input" type="text" id="costoenvio" name="costoenvio"><br>
+          {{ envioForm | crispy }}
   
           <h3 class="my-4">Productos</h3>
           <div id="productoDiv" class="mb-3">
@@ -122,6 +76,10 @@
             <label for="iva" class="form-label">IVA (19%)</label>
             <input type="number" class="form-control" id="iva" name="iva" readonly>
           </div>
+
+          <label for="direccion">Costo de envío:</label><br>
+          <input class="empresa-input" type="text" id="costoenvio" name="costoenvio"><br>
+
           <div id="totalDiv" class="mb-3">
             <label for="total" class="form-label">Total:</label>
             <input type="number" class="form-control" id="total" name="total" readonly>
