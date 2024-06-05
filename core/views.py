@@ -4,6 +4,8 @@ from django.contrib.auth.models import Group
 from django.core.paginator import Paginator
 from .forms import *
 from .models import *
+from django.shortcuts import redirect
+from django.contrib.auth import logout
 
 
 def index(request):
@@ -95,3 +97,7 @@ def factura(request, id):
     factura = Factura.objects.get(id=id)
     productos = factura.productos.all()
     return render(request, 'core/factura.html', {'factura': factura, 'productos': productos})
+
+def logout_view(request):
+    logout(request)
+    return redirect('login') 
