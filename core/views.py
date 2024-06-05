@@ -97,6 +97,7 @@ def ordenCompra(request):
         'envioForm': envioForm
     })
 
+@login_required
 def factura(request, id):
     factura = Factura.objects.get(id=id)
     productos = factura.productos.all()
