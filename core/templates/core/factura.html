@@ -1,0 +1,168 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block css %}
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block contenido %}
+<br>
+<div class="container">
+    <h1 class="text-center my-4">Factura</h1>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th scope="row">Empresa</th>
+                <td>{{ factura.empresa }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Dirección</th>
+                <td>{{ factura.empresa.direccion }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Telefono</th>
+                <td>{{ factura.empresa.telefono }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Correo</th>
+                <td>{{ factura.empresa.correo }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Sitio Web</th>
+                <td>{{ factura.empresa.web }}</td>
+            </tr>
+            <tr>
+                <th scope="row">---</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">Vendedor</th>
+                <td>{{ factura.vendedor }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Dirección</th>
+                <td>{{ factura.vendedor.direccion }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Telefono</th>
+                <td>{{ factura.vendedor.telefono }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Correo</th>
+                <td>{{ factura.vendedor.correo }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Sitio Web</th>
+                <td>{{ factura.vendedor.web }}</td>
+            </tr>
+            <tr>
+                <th scope="row">---</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">Cliente</th>
+                <td>{{ factura.cliente }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Empresa</th>
+                <td>{{ factura.cliente.nombreEmpresa }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Dirección</th>
+                <td>{{ factura.cliente.direccion }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Telefono</th>
+                <td>{{ factura.cliente.telefono }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Correo</th>
+                <td>{{ factura.cliente.correo }}</td>
+            </tr>
+            <tr>
+                <th scope="row">---</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">Metodo de Envío</th>
+                <td>{{ factura.envio.metodoenvio }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Dirección</th>
+                <td>{{ factura.envio.direccionenvio }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Condiciones</th>
+                <td>{{ factura.envio.condicionesenvio }}</td>
+            </tr>
+            <tr>
+                <th scope="row">---</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">Subtotal</th>
+                <td>{{ factura.subtotal }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Descuento%</th>
+                <td>{{ factura.descuento }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Descuento Monto</th>
+                <td>{{ factura.descuentoMonto }}</td>
+            </tr>
+            <tr>
+                <th scope="row">IVA%</th>
+                <td>{{ factura.iva }}</td>
+            </tr>
+            <tr>
+                <th scope="row">IVA Monto</th>
+                <td>{{ factura.ivaMonto }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Costo Envio</th>
+                <td>{{ factura.costoenvio }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Total</th>
+                <td>{{ factura.total }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <h1 class="text-center my-4">Productos</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">codigo</th>
+                <th scope="col">descripcion</th>
+                <th scope="col">cantidad</th>
+                <th scope="col">precio</th>
+                <th scope="col">monto</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for producto in productos %}
+          <tr>
+              <td>{{ producto.codigo }}</td>
+              <td>{{ producto.descripcion }}</td>
+              <td>{{ producto.cantidad }}</td>
+              <td>{{ producto.precio }}</td>
+              <td>{{ producto.monto }}</td>
+
+          </tr>
+          {% endfor %}
+            <!-- Agrega más filas según sea necesario -->
+        </tbody>
+    </table>
+  </div>
+  <br><br>
+
+{% endblock %}
+
+{% block js %}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}

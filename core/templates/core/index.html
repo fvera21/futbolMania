@@ -3,59 +3,45 @@
 
 {% block css %}
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    .table {
-      width: 50%; 
-      margin: 20px auto; 
-      border-collapse: collapse;
-    }
-    .table th, .table td {
-      border: 1px solid #ddd;
-      padding: 8px;
-    }
-    .table th {
-      background-color: #8a8a8a;
-      color: rgb(0, 0, 0);
-    }
-    .table tr:nth-child(even) {
-      background-color: #f2f2f2;
-    }
-    .table tr:hover {
-      background-color: #ddd;
-    }
-  </style>
 {% endblock %}
 
 {% block contenido %}
 
-<div class="container-lg">
+<div class="container">
   <h1 class="text-center my-4">Listado de Facturas</h1>
-  <div class="row justify-content-center">
-    <table class="table">
+  <table class="table table-striped">
       <thead>
-        <tr>
-          <th scope="col">Codigo</th>
-          <th scope="col">Nombre Empresa</th>
-          <th scope="col">RUT Empresa</th>
-          <th scope="col">Subtotal</th>
-          <th scope="col">Total</th>
-        </tr>
+          <tr>
+              <th scope="col">Empresa</th>
+              <th scope="col">Vendedor</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Envío</th>
+              <th scope="col">Subtotal</th>
+              <th scope="col">Descuento%</th>
+              <th scope="col">IVA%</th>
+              <th scope="col">Total</th>
+              <th scope="col"></th>
+          </tr>
       </thead>
       <tbody>
+        {% for factura in facturas %}
         <tr>
-          <td>1</td>
-          <td>Empresa 1</td>
-          <td>12345678-9</td>
-          <td>$1000</td>
-          <td>$1200</td>
+            <td>{{ factura.empresa }}</td>
+            <td>{{ factura.vendedor }}</td>
+            <td>{{ factura.cliente }}</td>
+            <td>{{ factura.envio }}</td>
+            <td>{{ factura.subtotal }}</td>
+            <td>{{ factura.descuento }}</td>
+            <td>{{ factura.iva }}</td>
+            <td>{{ factura.total }}</td>
+            <td><a href="{% url 'factura' factura.id %}" class="btn btn-primary btn-sm">Ver Más</a></td>
         </tr>
-        <!-- Agrega más filas aquí -->
+        {% endfor %}
+          <!-- Agrega más filas según sea necesario -->
       </tbody>
-    </table>
-    <a href="{% url 'ordenCompra' %}" class="btn btn-primary">Agregar orden de compra</a>
-  </div>
+  </table>
+  <a href="{% url 'ordenCompra' %}" class="btn btn-primary">Agregar orden de compra</a>
 </div>
-
 
 
 {% endblock %}

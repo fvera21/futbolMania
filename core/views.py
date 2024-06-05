@@ -7,7 +7,8 @@ from .models import *
 
 
 def index(request):
-    return render(request, 'core/index.html')
+    facturas = Factura.objects.all()
+    return render(request, 'core/index.html', {'facturas': facturas})
 
 def registro(request):
     data = {'form': RegistroForm()}
@@ -89,3 +90,8 @@ def ordenCompra(request):
         'clienteForm': clienteForm,
         'envioForm': envioForm
     })
+
+def factura(request, id):
+    factura = Factura.objects.get(id=id)
+    productos = factura.productos.all()
+    return render(request, 'core/factura.html', {'factura': factura, 'productos': productos})

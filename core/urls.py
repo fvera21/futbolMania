@@ -5,4 +5,5 @@ urlpatterns = [
     path('', index, name="index"),
     path('registro/', registro, name="registro"),
     path('ordenCompra/', ordenCompra, name="ordenCompra"),
+    path('factura/<int:id>/', factura, name="factura"),
 ]
