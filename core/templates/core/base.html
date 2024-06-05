@@ -63,9 +63,9 @@
     <h1><a href="#" class="nav-link {% if active_tab == 'home' %}active{% endif %}">Bienvenido: {{ user.username }}</a></h1>
     <h1><a href="{% url 'logout' %}" class="nav-link {% if active_tab == 'logout' %}active{% endif %}">Cerrar sesion</a></h1>
     {% else %}
-    <h1><a href="{% url 'login' %}" class="nav-link {% if active_tab == 'login' %}active{% endif %}">Ingresar</a></h1>  
+    <h1><a href="{% url 'login' %}" class="nav-link {% if active_tab == 'login' %}active{% endif %}">Ingresar <i class="fas fa-user"></i></a></h1>
     {% endif %}
-    <h1><a href="{% url 'index' %}" class="nav-link {% if active_tab == 'index' %}active{% endif %}">Facturas</a></h1>
+    <h1><a href="{% url 'index' %}" class="nav-link {% if active_tab == 'index' %}active{% endif %}">Facturas <i class="fas fa-file-invoice"></i></a></h1>
   </nav>
 
 
