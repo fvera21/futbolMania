@@ -121,7 +121,15 @@ $(document).ready(function(){
 
     $('#addRow').off('click').click(function(){
         i++;
-        $('#productoDiv').append('<div id="row'+i+'" class="mb-3"><div class="row"><div class="col"><label for="codigo" class="form-label">Código:</label><input type="text" class="form-control" id="codigo" name="codigo"></div><div class="col"><label for="descripcion" class="form-label">Descripción:</label><input type="text" class="form-control" id="descripcion" name="descripcion"></div><div class="col"><label for="cantidad" class="form-label">Cantidad:</label><input type="number" class="form-control" id="cantidad" name="cantidad"></div><div class="col"><label for="precio" class="form-label">Precio:</label><input type="number" class="form-control" id="precio" name="precio" step="0.01"></div></div><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div>');
+        $('#productoDiv').append('<div id="row'+i+'" class="mb-3"><div class="row"><div class="col"><label for="codigo" class="form-label">Código:</label><input type="text" class="form-control" id="codigo" name="codigo"></div><div class="col"><label for="descripcion" class="form-label">Descripción:</label><input type="text" class="form-control" id="descripcion" name="descripcion"></div><div class="col"><label for="cantidad" class="form-label">Cantidad:</label><input type="number" class="form-control" id="cantidad" name="cantidad"></div><div class="col"><label for="precio" class="form-label">Precio:</label><input type="number" class="form-control" id="precio" name="precio" step="0.01"></div><div class="col"><label for="monto" class="form-label">Monto:</label><input type="number" class="form-control" id="monto" name="monto" readonly></div></div><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div>');
+        recalculateSubtotal();
+    });
+
+    $(document).on('change', 'input[name="precio"], input[name="cantidad"]', function() {
+        var precio = parseFloat($(this).closest('.row').find('input[name="precio"]').val()) || 0;
+        var cantidad = parseFloat($(this).closest('.row').find('input[name="cantidad"]').val()) || 0;
+        var monto = Math.round(precio * cantidad);
+        $(this).closest('.row').find('input[name="monto"]').val(monto);
         recalculateSubtotal();
     });
 

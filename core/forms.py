@@ -12,7 +12,7 @@ class EmpresaForm(forms.Form):
     direccion = forms.CharField(label='Dirección', max_length=200)
     telefono = forms.CharField(label='Teléfono', max_length=15)
     correo = forms.EmailField(label='Correo')
-    web = forms.URLField(label='Sitio Web')
+    web = forms.URLField(label='Sitio Web', required=False)
 
 class ClienteForm(forms.Form):
     nombrecliente = forms.CharField(label='Nombre del cliente', max_length=100)
@@ -22,7 +22,7 @@ class ClienteForm(forms.Form):
     correo = forms.EmailField(label='Correo')
 
 class EnvioForm(forms.Form):
-    metodoenvio = forms.CharField(label='Método de envío', max_length=100)
+    metodoenvio = forms.CharField(label='Método de envío', max_length=100, required=False)
     direccionenvio = forms.CharField(label='Dirección', max_length=200)
-    condicionesenvio = forms.CharField(label='Condiciones de envío', max_length=500)
+    condicionesenvio = forms.CharField(label='Condiciones de envío', max_length=500, required=False)
 
