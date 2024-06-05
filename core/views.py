@@ -6,11 +6,14 @@ from .forms import *
 from .models import *
 from django.shortcuts import redirect
 from django.contrib.auth import logout
-
+from django.contrib.auth.decorators import login_required
 
 def index(request):
-    facturas = Factura.objects.all()
-    return render(request, 'core/index.html', {'facturas': facturas})
+    if request.user.is_authenticated:
+        facturas = Factura.objects.all()
+        return render(request, 'core/index.html', {'facturas': facturas})
+    else:
+        return redirect('login')
 
 def registro(request):
     data = {'form': RegistroForm()}
@@ -26,6 +29,7 @@ def registro(request):
             data["form"] = formulario
     return render(request, 'core/registro.html', data)
 
+@login_required
 def ordenCompra(request):
     if request.method == 'POST':
         empresaForm = EmpresaForm(request.POST, prefix='empresaForm')
