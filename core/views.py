@@ -31,12 +31,19 @@ def ordenCompra(request):
         envioForm = EnvioForm(request.POST, prefix='envioForm')
 
         subtotal = request.POST.get('subtotal')
+        if subtotal == '': subtotal = 0
         descuento = request.POST.get('descuento')
+        if descuento == '': descuento = 0
         monto_descuento = request.POST.get('descuentoMonto')
+        if monto_descuento == '': monto_descuento = 0
         iva = request.POST.get('iva')
+        if iva == '': iva = 0
         monto_iva = request.POST.get('ivaMonto')
+        if monto_iva == '': monto_iva = 0
         costo_envio = request.POST.get('costoenvio')
+        if costo_envio == '': costo_envio = 0
         total = request.POST.get('total')
+        if total == '': total = 0
 
         print(subtotal, descuento, monto_descuento, iva, monto_iva, costo_envio, total)
 
@@ -47,27 +54,28 @@ def ordenCompra(request):
             envio = Envio.objects.create(**envioForm.cleaned_data)
             factura = Factura.objects.create(empresa=empresa,vendedor=vendedor,cliente=cliente,envio=envio,subtotal=subtotal, descuento=descuento, descuentoMonto=monto_descuento, iva=iva, ivaMonto=monto_iva, costoenvio=costo_envio, total=total)
 
-            # Aquí puedes procesar los datos del formulario
-            # ...
 
             # Para los productos, necesitarás iterar sobre los campos de los productos en la solicitud POST
-            """
-            productos = []
-            for key in request.POST:
-                if key.startswith('codigo'):
-                    producto_data = {
-                        'codigo': request.POST[key],
-                        'descripcion': request.POST[key.replace('codigo', 'descripcion')],
-                        'cantidad': request.POST[key.replace('codigo', 'cantidad')],
-                        'precio': request.POST[key.replace('codigo', 'precio')],
-                        'monto': request.POST[key.replace('codigo', 'monto')],
-                    }
-                    producto = Producto.objects.create(**producto_data)
-                    productos.append(producto)
-            """
+            num_productos = sum('codigo' in key for key in request.POST.keys())
+            print("NUM PRODUCTOS")
+            print(num_productos)
 
-            # Aquí puedes procesar los datos de los productos
-            # ...
+            for i in range(1, num_productos + 2):
+                codigo_key = 'codigo' + str(i)
+                if codigo_key in request.POST:
+                    producto_data = {
+                        'codigo': request.POST[codigo_key],
+                        'descripcion': request.POST[codigo_key.replace('codigo', 'descripcion')],
+                        'cantidad': request.POST[codigo_key.replace('codigo', 'cantidad')],
+                        'precio': request.POST[codigo_key.replace('codigo', 'precio')],
+                        'monto': request.POST[codigo_key.replace('codigo', 'monto')],
+                    }
+                    print("PRODUCTO DATA")
+                    print(producto_data)
+                    producto = Producto.objects.create(factura=factura, **producto_data)
+                    print("PRODUCTO OBJECT")
+                    print(producto)
+
 
     else:
         empresaForm = EmpresaForm(prefix='empresaForm')
