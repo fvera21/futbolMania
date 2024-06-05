@@ -72,13 +72,31 @@
             <label for="subtotal" class="form-label">Subtotal:</label>
             <input type="number" class="form-control" id="subtotal" name="subtotal" readonly>
           </div>
-          <div id="ivaDiv" class="mb-3">
-            <label for="iva" class="form-label">IVA (19%)</label>
-            <input type="number" class="form-control" id="iva" name="iva" readonly>
+
+          <div id="descuentoDiv" class="mb-3">
+          <label for="descuento">Descuento %:</label><br>
+          <input class="form-control" type="number" id="descuento" name="descuento">
           </div>
 
-          <label for="direccion">Costo de envío:</label><br>
-          <input class="empresa-input" type="text" id="costoenvio" name="costoenvio"><br>
+          <div id="descuentoMontoDiv" class="mb-3">
+            <label for="descuentoMonto" class="form-label">Monto Descuento</label>
+            <input type="number" class="form-control" id="descuentoMonto" name="descuentoMonto" readonly>
+          </div>
+
+          <div id="ivaDiv" class="mb-3">
+            <label for="iva" class="form-label">IVA (%)</label>
+            <input type="number" class="form-control" id="iva" name="iva">
+          </div>
+
+          <div id="ivaMontoDiv" class="mb-3">
+            <label for="ivaMonto" class="form-label">Monto IVA</label>
+            <input type="number" class="form-control" id="ivaMonto" name="ivaMonto" readonly>
+          </div>
+
+          <div id="costoenvioDiv" class="mb-3">
+          <label for="costoenvio">Costo de envío:</label><br>
+          <input class="form-control" type="text" id="costoenvio" name="costoenvio">
+          </div>
 
           <div id="totalDiv" class="mb-3">
             <label for="total" class="form-label">Total:</label>
@@ -118,22 +136,42 @@ $(document).ready(function(){
     });
 
     function recalculateSubtotal() {
-        var subtotal = 0;
-        $('input[name="precio"]').each(function(index, element) {
-            var precio = parseFloat($(element).val()) || 0;
-            var cantidad = parseFloat($('input[name="cantidad"]').eq(index).val()) || 0;
-            subtotal += precio * cantidad;
-        });
-        $('#subtotal').val(Math.floor(subtotal));
+      var subtotal = 0;
+      $('input[name="precio"]').each(function(index, element) {
+          var precio = parseFloat($(element).val()) || 0;
+          var cantidad = parseFloat($('input[name="cantidad"]').eq(index).val()) || 0;
+          subtotal += precio * cantidad;
+      });
+      $('#subtotal').val(Math.floor(subtotal));
 
-        // Calcula el IVA como el 19% del subtotal
-        var iva = subtotal * 0.19;
-        $('#iva').val(Math.floor(iva));
+      // Aplica el descuento al subtotal
+      var descuentoPorcentaje = parseFloat($('#descuento').val()) || 0;
+      var descuentoMonto = subtotal * (descuentoPorcentaje / 100);
+      subtotal = subtotal - descuentoMonto;
 
-        // Calcula el total como la suma del subtotal y el IVA
-        var total = subtotal + iva;
-        $('#total').val(Math.round(total));
+      // Actualiza el campo de entrada de solo lectura con el monto del descuento
+      $('#descuentoMonto').val(Math.round(descuentoMonto));
+
+      // Obtiene el IVA como un porcentaje ingresado por el usuario
+      var ivaPorcentaje = parseFloat($('#iva').val()) || 0;
+      var iva = subtotal * (ivaPorcentaje / 100);
+
+      // Actualiza el campo de entrada de solo lectura con el monto del IVA
+      $('#ivaMonto').val(Math.round(iva));
+
+      // Calcula el total como la suma del subtotal y el IVA
+      var total = subtotal + iva;
+
+      // Agrega el costo de envío al total después de aplicar el descuento
+      var costoenvio = parseFloat($('#costoenvio').val()) || 0;
+      total += costoenvio;
+
+      $('#total').val(Math.round(total));
     }
+  
+    // Llama a recalculateSubtotal cuando cambien los campos de costo de envío, descuento e IVA
+    $('#costoenvio, #descuento, #iva').change(recalculateSubtotal);
+  
 });
   </script>
 {% endblock %}
