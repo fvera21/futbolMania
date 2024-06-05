@@ -12,7 +12,7 @@
 <div class="container-fluid d-flex justify-content-center align-items-center">
     <div class="p-5 rounded-5 text-dark shadow" style="width: 25rem; background-color: rgb(236, 236, 236);">
         <form action="" method="post">
-            <div class="text-center fs-1 fw-bold mb-4">Login</div>
+            <div class="text-center fs-1 fw-bold mb-4">Login <i class="fas fa-sign-in-alt"></i></div>
             {% csrf_token %}
             {{ form | crispy }}
             <div class="d-flex justify-content-around mt-1">
