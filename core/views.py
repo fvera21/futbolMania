@@ -30,12 +30,22 @@ def ordenCompra(request):
         clienteForm = ClienteForm(request.POST, prefix='clienteForm')
         envioForm = EnvioForm(request.POST, prefix='envioForm')
 
-        if empresaForm.is_valid() and vendedorForm.is_valid() and clienteForm.is_valid() and envioForm.is_valid():
-            # Crear instancias de los modelos con los datos del formulario
+        subtotal = request.POST.get('subtotal')
+        descuento = request.POST.get('descuento')
+        monto_descuento = request.POST.get('descuentoMonto')
+        iva = request.POST.get('iva')
+        monto_iva = request.POST.get('ivaMonto')
+        costo_envio = request.POST.get('costoenvio')
+        total = request.POST.get('total')
+
+        print(subtotal, descuento, monto_descuento, iva, monto_iva, costo_envio, total)
+
+        if empresaForm.is_valid() and vendedorForm.is_valid() and clienteForm.is_valid() and envioForm.is_valid():            # Crear instancias de los modelos con los datos del formulario
             empresa = Empresa.objects.create(**empresaForm.cleaned_data)
             vendedor = Vendedor.objects.create(**vendedorForm.cleaned_data)
             cliente = Cliente.objects.create(**clienteForm.cleaned_data)
             envio = Envio.objects.create(**envioForm.cleaned_data)
+            factura = Factura.objects.create(empresa=empresa,vendedor=vendedor,cliente=cliente,envio=envio,subtotal=subtotal, descuento=descuento, descuentoMonto=monto_descuento, iva=iva, ivaMonto=monto_iva, costoenvio=costo_envio, total=total)
 
             # Aquí puedes procesar los datos del formulario
             # ...
