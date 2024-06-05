@@ -12,7 +12,7 @@ class EmpresaForm(forms.Form):
     direccion = forms.CharField(label='Dirección', max_length=200)
     telefono = forms.CharField(label='Teléfono', max_length=15)
     correo = forms.EmailField(label='Correo')
-    web = forms.URLField(label='Sitio Web', required=False)
+    web = forms.CharField(label='Sitio Web', max_length=30, required=False)
 
 class ClienteForm(forms.Form):
     nombrecliente = forms.CharField(label='Nombre del cliente', max_length=100)
