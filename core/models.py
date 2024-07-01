@@ -59,5 +59,7 @@ class Producto(models.Model):
     monto = models.IntegerField()
     factura = models.ForeignKey(Factura, related_name='productos', on_delete=models.CASCADE, null=True)
 
+    
+
     def __str__(self):
         return self.codigo

@@ -26,3 +26,9 @@ class EnvioForm(forms.Form):
     direccionenvio = forms.CharField(label='Dirección', max_length=200)
     condicionesenvio = forms.CharField(label='Condiciones de envío', max_length=500, required=False)
 
+class VendedorForm(forms.Form):
+    nombrevendedor = forms.CharField(label='Nombre del vendedor', max_length=100)
+    direccion = forms.CharField(label='Dirección', max_length=200)
+    telefono = forms.CharField(label='Teléfono', max_length=15)
+    correo = forms.EmailField(label='Correo')
+    sitioweb = forms.CharField(label='Sitio Web', max_length=200)

@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import Group
-from django.core.paginator import Paginator
-from .forms import *
-from .models import *
-from django.shortcuts import redirect
-from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+from .forms import RegistroForm, EmpresaForm, ClienteForm, EnvioForm, VendedorForm
+from .models import Factura, Empresa, Vendedor, Cliente, Envio, Producto
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.units import inch
+
 
 def index(request):
     if request.user.is_authenticated:
@@ -99,10 +101,135 @@ def ordenCompra(request):
 
 @login_required
 def factura(request, id):
-    factura = Factura.objects.get(id=id)
+    factura = get_object_or_404(Factura, id=id)
     productos = factura.productos.all()
     return render(request, 'core/factura.html', {'factura': factura, 'productos': productos})
 
 def logout_view(request):
     logout(request)
-    return redirect('login') 
+    return redirect('login')
+
+def imprimir_seccion(canvas, y, titulo, datos, titulo_font_size=12, datos_font_size=10, espacio_entre_lineas=14, margen_izquierdo=72, ancho_columna=200):
+    if titulo:
+        canvas.setFont("Helvetica-Bold", titulo_font_size)
+        canvas.drawString(margen_izquierdo, y, titulo)
+        y -= espacio_entre_lineas
+
+    canvas.setFont("Helvetica", datos_font_size)
+    for clave, valor in datos.items():
+        canvas.drawString(margen_izquierdo, y, clave)
+        canvas.drawString(margen_izquierdo + ancho_columna, y, str(valor))
+        y -= espacio_entre_lineas
+
+    return y
+
+@login_required
+def orden_compra_pdf(request, factura_id):
+    factura = get_object_or_404(Factura, pk=factura_id)
+    Y_START = 750
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="factura_{factura_id}.pdf"'
+    p = canvas.Canvas(response, pagesize=letter)
+    y = Y_START
+
+    # Insertar encabezado de la factura
+    p.setFont("Helvetica-Bold", 16)
+    titulo = "Factura"
+    titulo_ancho = p.stringWidth(titulo, "Helvetica-Bold", 16)
+    p.drawString((letter[0] - titulo_ancho) / 2.0, y, titulo)
+    y -= 30
+    p.line(50, y, 550, y)  # Línea divisoria
+    y -= 20
+
+    # Configuraciones
+    MARGIN_LEFT = 50
+    Y_SECTION_GAP = 20
+    LINE_GAP = 12
+    TITLE_FONT_SIZE = 12
+    BODY_FONT_SIZE = 10
+
+    secciones = [
+        ("Detalles de la Factura", {
+            "Número de Factura": factura.id,
+        }),
+        ("Empresa", {
+            "Empresa": factura.empresa.nombreEmpresa,
+            "Dirección": factura.empresa.direccion,
+            "Teléfono": factura.empresa.telefono,
+            "Correo": factura.empresa.correo,
+            "Sitio Web": factura.empresa.web
+        }),
+        ("Cliente", {
+            "Nombre": factura.cliente.nombreEmpresa,
+            "Dirección": factura.cliente.direccion,
+            "Teléfono": factura.cliente.telefono,
+            "Correo": factura.cliente.correo
+        }),
+        ("Envío", {
+            "Método de Envío": factura.envio.metodoenvio,
+            "Dirección de Envío": factura.envio.direccionenvio,
+            "Condiciones de Envío": factura.envio.condicionesenvio
+        })
+    ]
+
+    for titulo, datos in secciones:
+        y = imprimir_seccion(p, y, titulo, datos, TITLE_FONT_SIZE, BODY_FONT_SIZE, LINE_GAP, MARGIN_LEFT)
+        y -= Y_SECTION_GAP
+        p.line(50, y + 10, 550, y + 10)  # Línea divisoria
+        y -= 10
+
+    p.setFont("Helvetica-Bold", TITLE_FONT_SIZE)
+    p.drawString(MARGIN_LEFT, y, "Productos")
+    y -= Y_SECTION_GAP
+
+    # Encabezados de columna para productos
+    encabezados_productos = ["Código", "Descripción", "Cantidad", "Precio", "Monto"]
+    espacio_entre_columnas = 72  # Ajustar según sea necesario
+
+    # Dibujar encabezados de columna
+    p.setFont("Helvetica-Bold", BODY_FONT_SIZE)
+    y -= LINE_GAP
+    for i, encabezado in enumerate(encabezados_productos):
+        p.drawString(MARGIN_LEFT + i * espacio_entre_columnas, y, encabezado)
+
+    # Restablecer fuente para contenido
+    p.setFont("Helvetica", BODY_FONT_SIZE)
+    y -= LINE_GAP
+
+    # Listar productos
+    for producto in factura.productos.all():
+        p.drawString(MARGIN_LEFT, y, producto.codigo)
+        p.drawString(MARGIN_LEFT + espacio_entre_columnas, y, producto.descripcion)
+        p.drawString(MARGIN_LEFT + 2 * espacio_entre_columnas, y, str(producto.cantidad))
+        p.drawString(MARGIN_LEFT + 3 * espacio_entre_columnas, y, f"${producto.precio}")
+        p.drawString(MARGIN_LEFT + 4 * espacio_entre_columnas, y, f"${producto.monto}")
+        y -= LINE_GAP
+
+    # Asegurarse de que hay espacio suficiente para el resumen final
+    if y < 100:  # Ajustar según sea necesario
+        p.showPage()
+        y = Y_START  # Restablecer Y para la nueva página
+
+    # Línea divisoria antes de los totales
+    p.line(50, y, 550, y)
+    y -= 20
+
+    # Resumen final
+    y = imprimir_seccion(p, y, "Totales", {
+        "Subtotal": factura.subtotal,
+        "Descuento": f"{factura.descuento}%",
+        "Descuento Monto": factura.descuentoMonto,
+        "IVA": f"{factura.iva}%",
+        "IVA Monto": factura.ivaMonto,
+        "Costo Envío": factura.costoenvio,
+        "Total": factura.total
+    }, TITLE_FONT_SIZE, BODY_FONT_SIZE, LINE_GAP, MARGIN_LEFT)
+
+    p.line(50, y, 550, y)  # Línea divisoria final
+    y -= 30
+
+    p.setFont("Helvetica-Bold", 10)
+    p.drawString(MARGIN_LEFT, y, "Gracias por su compra!")
+    
+    p.save()
+    return response
