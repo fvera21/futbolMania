@@ -157,8 +157,10 @@
             <!-- Agrega más filas según sea necesario -->
         </tbody>
     </table>
+    <br>
+    <td><td><a href="{% url 'orden_compra_pdf' factura.id %}" class="btn btn-info btn-lg">Exportar PDF</a></td></td>
   </div>
-  <br><br>
+  <br>
 {% endblock %}
 
 {% block js %}

@@ -35,7 +35,7 @@
             <td>{{ factura.iva }}%</td>
             <td>{{ factura.total }}</td>
             <td><a href="{% url 'factura' factura.id %}" class="btn btn-primary btn-sm">Ver Más</a></td>
-            <td><td><a href="{% url 'orden_compra_pdf' factura.id %}" class="btn btn-info">Descargar Orden de Compra en PDF</a></td></td>
+            <td><td><a href="{% url 'orden_compra_pdf' factura.id %}" class="btn btn-info">Exportar PDF</a></td></td>
         </tr>
         {% endfor %}
       </tbody>
