@@ -35,7 +35,7 @@ def registro(request):
 def ordenCompra(request):
     if request.method == 'POST':
         empresaForm = EmpresaForm(request.POST, prefix='empresaForm')
-        vendedorForm = EmpresaForm(request.POST, prefix='vendedorForm')
+        vendedorForm = VendedorForm(request.POST, prefix='vendedorForm')
         clienteForm = ClienteForm(request.POST, prefix='clienteForm')
         envioForm = EnvioForm(request.POST, prefix='envioForm')
 
@@ -88,7 +88,7 @@ def ordenCompra(request):
 
     else:
         empresaForm = EmpresaForm(prefix='empresaForm')
-        vendedorForm = EmpresaForm(prefix='vendedorForm')
+        vendedorForm = VendedorForm(prefix='vendedorForm')
         clienteForm = ClienteForm(prefix='clienteForm')
         envioForm = EnvioForm(prefix='envioForm')
 
