@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from .forms import RegistroForm, EmpresaForm, ClienteForm, EnvioForm, VendedorForm
-from .models import Factura, Empresa, Vendedor, Cliente, Envio, Producto
+from .forms import *
+from .models import *
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
@@ -103,7 +103,15 @@ def ordenCompra(request):
 def factura(request, id):
     factura = get_object_or_404(Factura, id=id)
     productos = factura.productos.all()
-    return render(request, 'core/factura.html', {'factura': factura, 'productos': productos})
+    if request.method == "POST":
+        form = EstadosForm(request.POST, instance=factura)
+        if form.is_valid():
+            form.save()
+            # Redirige a alguna URL de éxito después de guardar, ajusta según sea necesario
+            return redirect('factura', id=factura.id)
+    else:
+        form = EstadosForm(instance=factura)  # Utiliza EstadosForm para precargar los datos
+    return render(request, 'core/factura.html', {'factura': factura, 'productos': productos, 'form': form})
 
 def logout_view(request):
     logout(request)

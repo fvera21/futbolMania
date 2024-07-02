@@ -1,4 +1,5 @@
 from django import forms
+from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -46,4 +47,16 @@ class EnvioForm(forms.Form):
     direccionenvio = forms.CharField(label='Dirección', max_length=200)
     condicionesenvio = forms.CharField(label='Condiciones de envío', max_length=500, required=False)
 
+class EstadosForm(forms.ModelForm):
+    class Meta:
+        model = Factura
+        fields = ['estadoEnvio', 'estadoOrden', 'estadoModificacion']
+        labels = {
+            'estadoEnvio': 'Estado del Envio',
+            'estadoOrden': 'Estado de la Orden',
+            'estadoModificacion': 'Estado de Modificaciones',
+        }
 
+    def __init__(self, *args, **kwargs):
+        super(EstadosForm, self).__init__(*args, **kwargs)
+        self.fields['estadoModificacion'].disabled = True

@@ -1,6 +1,8 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
+{% load crispy_forms_tags %}
+
 {% block css %}
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
 {% endblock %}
@@ -157,10 +159,18 @@
             <!-- Agrega más filas según sea necesario -->
         </tbody>
     </table>
-    <br>
-    <td><td><a href="{% url 'orden_compra_pdf' factura.id %}" class="btn btn-info btn-lg">Exportar PDF</a></td></td>
   </div>
-  <br>
+
+<div class="container">
+    <h1 class="text-center">Estados</h1>
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        {{ form | crispy}}
+        <br>
+        <button type="submit" class="btn btn-success btn-lg">Guardar cambios</button>
+    </form>
+    <td><td><a href="{% url 'orden_compra_pdf' factura.id %}" class="btn btn-primary btn-lg">Exportar PDF</a></td></td>
+</div>
 {% endblock %}
 
 {% block js %}
