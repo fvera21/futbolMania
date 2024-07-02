@@ -159,8 +159,16 @@ def orden_compra_pdf(request, factura_id):
             "Correo": factura.empresa.correo,
             "Sitio Web": factura.empresa.web
         }),
+        ("Vendedor", {
+            "Empresa": factura.vendedor.nombreEmpresa,
+            "Dirección": factura.vendedor.direccion,
+            "Teléfono": factura.vendedor.telefono,
+            "Correo": factura.vendedor.correo,
+            "Sitio Web": factura.vendedor.web
+        }),
         ("Cliente", {
-            "Nombre": factura.cliente.nombreEmpresa,
+            "Empresa": factura.cliente.nombreEmpresa,
+            "Nombre": factura.cliente.nombrecliente,
             "Dirección": factura.cliente.direccion,
             "Teléfono": factura.cliente.telefono,
             "Correo": factura.cliente.correo
@@ -229,7 +237,6 @@ def orden_compra_pdf(request, factura_id):
     y -= 30
 
     p.setFont("Helvetica-Bold", 10)
-    p.drawString(MARGIN_LEFT, y, "Gracias por su compra!")
     
     p.save()
     return response
