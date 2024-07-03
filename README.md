@@ -9,11 +9,11 @@
 ## Instalación
 ### 1. Descarga este repositorio en tu ordenador
 
-- **Acción**: Clona el repositorio desde GitHub a tu ordenador.
+- **Clona el repositorio desde GitHub a tu ordenador.**
 - **Cómo hacerlo**: 
   - Abre tu navegador web y navega a la página del repositorio en GitHub.
   - Haz clic en el botón "Code" y copia la URL del repositorio.
-  - Abre una terminal (Command Prompt en Windows, Terminal en macOS o Linux).
+  - Abre una terminal (Command Prompt)
   - Usa el comando `git clone [URL_del_repositorio]` para clonar el repositorio en tu ordenador. Reemplaza `[URL_del_repositorio]` con la URL que copiaste.
   
   ```bash
@@ -22,7 +22,7 @@
 
 ### 2. Abrir el repositorio en Visual Studio Code
 
-- **Acción**: Abre la carpeta del repositorio clonado en Visual Studio Code.
+- **Abre la carpeta del repositorio clonado en Visual Studio Code.**
 - **Cómo hacerlo**: 
   - Abre Visual Studio Code.
   - Haz clic en "File" > "Open Folder" y navega hasta la carpeta donde clonaste el repositorio.
@@ -30,10 +30,9 @@
 
 ### 3. Instala las dependencias necesarias con pip
 
-- **Acción**: Instalar todas las dependencias del proyecto.
+- **Instalar todas las dependencias del proyecto.**
 - **Cómo hacerlo**: 
-  - Abre la terminal integrada en Visual Studio Code (View > Terminal).
-  - Asegúrate de que tu entorno virtual de Python esté activado si estás usando uno.
+  - Abre la terminal en Visual Studio Code.
   - Ejecuta el siguiente comando para instalar las dependencias desde el archivo `requirements.txt`:
   
   ```bash
@@ -42,7 +41,7 @@
 
 ### 4. Abrir XAMPP y hacer clic en "Start" en APACHE y MYSQL
 
-- **Acción**: Iniciar los servicios de Apache y MySQL en XAMPP.
+- **Iniciar los servicios de Apache y MySQL en XAMPP.**
 - **Cómo hacerlo**: 
   - Abre XAMPP desde el menú de inicio de tu ordenador.
   - En el panel de control de XAMPP, encuentra los módulos de "Apache" y "MySQL".
@@ -50,14 +49,14 @@
 
 ### 5. En XAMPP, hacer clic en el botón "ADMIN" de MySQL
 
-- **Acción**: Abrir phpMyAdmin.
+- **Abrir phpMyAdmin.**
 - **Cómo hacerlo**: 
   - En el panel de control de XAMPP, haz clic en el botón "Admin" junto a "MySQL".
   - Esto abrirá una nueva pestaña en tu navegador con phpMyAdmin.
 
 ### 6. En phpMyAdmin, importar la base de datos
 
-- **Acción**: Importar la base de datos del proyecto.
+- **Importar la base de datos del proyecto.**
 - **Cómo hacerlo**: 
   - En la interfaz de phpMyAdmin, selecciona la opción "Importar" en la parte superior.
   - Haz clic en "Seleccionar archivo" y navega hasta la carpeta del proyecto para encontrar el archivo `futbolmania.sql`.
@@ -65,11 +64,10 @@
 
 ### 7. Ejecutar el servidor local
 
-- **Acción**: Iniciar el servidor de desarrollo de Django.
+- **Iniciar el servidor de desarrollo de Django.**
 - **Cómo hacerlo**: 
-  - Vuelve a la terminal integrada en Visual Studio Code.
-  - Asegúrate de estar en el directorio principal del proyecto (donde se encuentra `manage.py`).
-  - Ejecuta el siguiente comando para iniciar el servidor de desarrollo:
+  - Vuelve a la terminal en Visual Studio Code.
+  - Ejecuta el siguiente comando para iniciar el servidor:
 
   ```bash
   python manage.py runserver
@@ -77,7 +75,7 @@
 
 ### 8. Abrir la aplicación en tu navegador
 
-- **Acción**: Acceder a la aplicación web.
+- **Acceder a la aplicación web.**
 - **Cómo hacerlo**: 
   - Después de ejecutar el servidor, aparecerá un enlace en la consola que generalmente es `http://127.0.0.1:8000/`.
   - Haz clic en el enlace o cópialo y pégalo en tu navegador para abrir la aplicación.
