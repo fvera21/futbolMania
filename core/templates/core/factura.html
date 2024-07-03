@@ -138,11 +138,11 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">codigo</th>
-                <th scope="col">descripcion</th>
-                <th scope="col">cantidad</th>
-                <th scope="col">precio</th>
-                <th scope="col">monto</th>
+                <th scope="col">Codigo</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Monto</th>
             </tr>
         </thead>
         <tbody>
@@ -163,12 +163,32 @@
 
 <div class="container">
     <h1 class="text-center">Estados</h1>
-    <form method="post" class="mb-4">
-        {% csrf_token %}
-        {{ form | crispy}}
-        <br>
-        <button type="submit" class="btn btn-success btn-lg">Guardar cambios</button>
-    </form>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Tipo</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Envío</td>
+                <td>{{ factura.estadoEnvio }}</td>
+                <td><a href="{% url 'entregar' factura.id %}" class="btn btn-success btn-lg">Entregar</a>  <a href="{% url 'rechazar' factura.id %}" class="btn btn-danger btn-lg">Rechazar</a></td>
+            </tr>
+            <tr>
+                <td>Orden de compra / Facturada</td>
+                <td>{{ factura.estadoOrden }}</td>
+                <td><a href="{% url 'rectificar' factura.id %}" class="btn btn-info btn-lg">Orden de Compra</a>  <a href="{% url 'rectificar' factura.id %}" class="btn btn-info btn-lg">Facturada</a></td>
+            </tr>          
+            <tr>
+                <td>Creada / Rectificada</td>
+                <td>{{ factura.estadoModificacion }}</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
     <td><td><a href="{% url 'orden_compra_pdf' factura.id %}" class="btn btn-primary btn-lg">Exportar PDF</a></td></td>
     <td><td><a href="{% url 'rectificar' factura.id %}" class="btn btn-secondary btn-lg">Rectificar</a></td></td>
 </div>

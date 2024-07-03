@@ -98,15 +98,7 @@ def ordenCompra(request):
 def factura(request, id):
     factura = get_object_or_404(Factura, id=id)
     productos = factura.productos.all()
-    if request.method == "POST":
-        form = EstadosForm(request.POST, instance=factura)
-        if form.is_valid():
-            form.save()
-            # Redirige a alguna URL de éxito después de guardar, ajusta según sea necesario
-            return redirect('factura', id=factura.id)
-    else:
-        form = EstadosForm(instance=factura)  # Utiliza EstadosForm para precargar los datos
-    return render(request, 'core/factura.html', {'factura': factura, 'productos': productos, 'form': form})
+    return render(request, 'core/factura.html', {'factura': factura, 'productos': productos})
 
 def logout_view(request):
     logout(request)
@@ -327,3 +319,31 @@ def rectificar(request, id):
         'productoFormSet': productoFormSet,
         'factura': factura
     })
+
+def entregar(request,id):
+    factura = get_object_or_404(Factura, id=id)
+    form = EntregaForm()
+    return render(request, 'core/entregar.html', {'form': form, 'factura': factura})
+
+def rechazar(request, id):
+    factura = get_object_or_404(Factura, id=id)
+    if request.method == 'POST':
+        # Instanciar el formulario con los datos de la solicitud y el valor inicial para 'factura'
+        form = RechazoForm(request.POST, initial={'factura': factura.id})
+        if form.is_valid():
+            # Aquí, debes guardar el formulario. Si el campo 'factura' es un campo oculto,
+            # el valor inicial no se pasará como parte de request.POST, por lo que debes asignarlo manualmente antes de guardar.
+            rechazo = form.save(commit=False)
+            rechazo.factura = factura  # Asignar la instancia de Factura directamente
+            rechazo.save()
+
+            factura.estadoEnvio = EstadoEnvio.objects.get(pk=3)
+            factura.save()
+
+            return redirect('factura', id=factura.id)
+            # Redirigir o manejar la respuesta como desees después de guardar el objeto Rechazo
+    else:
+        # Instanciar el formulario con el valor inicial para 'factura' solo si es una solicitud GET
+        form = RechazoForm(initial={'factura': factura.id})
+    return render(request, 'core/rechazar.html', {'form': form, 'factura': factura})
+

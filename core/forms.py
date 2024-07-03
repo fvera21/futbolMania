@@ -137,3 +137,25 @@ class ProductoRectificarForm(forms.ModelForm):
             'cantidad': 'Cantidad',
             'precio': 'Precio',
         }
+
+class EntregaForm(forms.ModelForm):
+    class Meta:
+        model = Entrega
+        fields = ['direccion', 'rut', 'imagen']
+        labels = {
+            'direccion': 'Dirección',
+            'rut': 'RUT',
+            'imagen': 'Imagen',
+        }
+
+class RechazoForm(forms.ModelForm):
+    class Meta:
+        model = Rechazo
+        fields = ['factura', 'descripcion']
+        labels = {
+            'descripcion': 'Descripción',
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(RechazoForm, self).__init__(*args, **kwargs)
+        self.fields['factura'].widget = forms.HiddenInput()
