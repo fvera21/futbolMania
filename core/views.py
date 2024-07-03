@@ -54,8 +54,6 @@ def ordenCompra(request):
         total = request.POST.get('total')
         if total == '': total = 0
 
-        print(subtotal, descuento, monto_descuento, iva, monto_iva, costo_envio, total)
-
         if empresaForm.is_valid() and vendedorForm.is_valid() and clienteForm.is_valid() and envioForm.is_valid():            # Crear instancias de los modelos con los datos del formulario
             empresa = Empresa.objects.create(**empresaForm.cleaned_data)
             vendedor = Vendedor.objects.create(**vendedorForm.cleaned_data)
@@ -66,8 +64,6 @@ def ordenCompra(request):
 
             # Para los productos, necesitarás iterar sobre los campos de los productos en la solicitud POST
             num_productos = sum('codigo' in key for key in request.POST.keys())
-            print("NUM PRODUCTOS")
-            print(num_productos)
 
             for i in range(1, num_productos + 2):
                 codigo_key = 'codigo' + str(i)
@@ -79,11 +75,9 @@ def ordenCompra(request):
                         'precio': request.POST[codigo_key.replace('codigo', 'precio')],
                         'monto': request.POST[codigo_key.replace('codigo', 'monto')],
                     }
-                    print("PRODUCTO DATA")
-                    print(producto_data)
+
                     producto = Producto.objects.create(factura=factura, **producto_data)
-                    print("PRODUCTO OBJECT")
-                    print(producto)
+
 
 
     else:
@@ -248,3 +242,44 @@ def orden_compra_pdf(request, factura_id):
     
     p.save()
     return response
+
+def rectificar(request, id):
+    factura = get_object_or_404(Factura, id=id)
+    empresa = factura.empresa
+    vendedor = factura.vendedor
+    cliente = factura.cliente
+    envio = factura.envio
+
+    if request.method == 'POST':
+        empresaForm = EmpresaRectificarForm(request.POST, instance=empresa, prefix='empresaForm')
+        vendedorForm = VendedorRectificarForm(request.POST, instance=vendedor, prefix='vendedorForm')
+        clienteForm = ClienteRectificarForm(request.POST, instance=cliente, prefix='clienteForm')
+        envioForm = EnvioRectificarForm(request.POST, instance=envio, prefix='envioForm')
+        facturaForm = FacturaRectificarForm(request.POST, instance=factura, prefix='facturaForm')
+        
+        if empresaForm.is_valid() and vendedorForm.is_valid() and clienteForm.is_valid() and envioForm.is_valid() and facturaForm.is_valid():            # Crear instancias de los modelos con los datos del formulario
+            empresaForm.save()
+            vendedorForm.save()
+            clienteForm.save()
+            envioForm.save()
+            facturaForm.save()
+
+            # cambiar estado
+            factura.estadoModificacion = EstadoModificacion.objects.get(pk=2)
+            factura.save()
+            return redirect('factura', id=factura.id)
+    else:
+        empresaForm = EmpresaRectificarForm(instance=empresa, prefix='empresaForm')
+        vendedorForm = VendedorRectificarForm(instance=vendedor, prefix='vendedorForm')
+        clienteForm = ClienteRectificarForm(instance=cliente, prefix='clienteForm')
+        envioForm = EnvioRectificarForm(instance=envio, prefix='envioForm')
+        facturaForm = FacturaRectificarForm(instance=factura, prefix='facturaForm')
+    
+    return render(request, 'core/rectificar.html', {
+        'empresaForm': empresaForm,
+        'vendedorForm': vendedorForm,
+        'clienteForm': clienteForm,
+        'envioForm': envioForm,
+        'facturaForm': facturaForm,
+        'factura': factura
+    })

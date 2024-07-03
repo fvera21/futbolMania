@@ -60,3 +60,62 @@ class EstadosForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(EstadosForm, self).__init__(*args, **kwargs)
         self.fields['estadoModificacion'].disabled = True
+
+
+class EmpresaRectificarForm(forms.ModelForm):
+    class Meta:
+        model = Empresa
+        fields = ['nombreEmpresa', 'direccion', 'telefono', 'correo', 'web']
+        labels = {
+            'nombreEmpresa': 'Nombre de la empresa',
+            'direccion': 'Dirección',
+            'telefono': 'Teléfono',
+            'correo': 'Correo',
+            'web': 'Sitio Web',
+        }
+    
+
+class VendedorRectificarForm(forms.ModelForm):
+    class Meta:
+        model = Vendedor
+        fields = ['nombreEmpresa', 'direccion', 'telefono', 'correo', 'web']
+        labels = {
+            'nombreEmpresa': 'Nombre de la empresa',
+            'direccion': 'Dirección',
+            'telefono': 'Teléfono',
+            'correo': 'Correo',
+            'web': 'Sitio Web',
+        }
+
+
+class ClienteRectificarForm(forms.ModelForm):
+    class Meta:
+        model = Cliente
+        fields = ['nombrecliente', 'nombreEmpresa', 'direccion', 'telefono', 'correo']
+        labels = {
+            'nombrecliente': 'Nombre del cliente',
+            'nombreEmpresa': 'Nombre de la empresa',
+            'direccion': 'Dirección',
+            'telefono': 'Teléfono',
+            'correo': 'Correo',
+        }
+
+class EnvioRectificarForm(forms.ModelForm):
+    class Meta:
+        model = Envio
+        fields = ['metodoenvio', 'direccionenvio', 'condicionesenvio']
+        labels = {
+            'metodoenvio': 'Método de envío',
+            'direccionenvio': 'Dirección',
+            'condicionesenvio': 'Condiciones de envío',
+        }
+
+class FacturaRectificarForm(forms.ModelForm):
+    class Meta:
+        model = Factura
+        fields = ['descuento', 'iva', 'costoenvio']
+        labels = {
+            'descuento': 'Descuento (%)',
+            'iva': 'IVA (%)',
+            'costoenvio': 'Costo de envío',
+        } 

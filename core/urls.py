@@ -9,4 +9,5 @@ urlpatterns = [
     path('factura/<int:id>/', factura, name="factura"),
     path('logout/', views.logout_view, name='logout'),
     path('orden_compra_pdf/<int:factura_id>/', orden_compra_pdf, name='orden_compra_pdf'),
+    path('rectificar/<int:id>/', rectificar, name="rectificar"),
 ]

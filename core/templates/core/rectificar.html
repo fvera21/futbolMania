@@ -1,0 +1,81 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block css %}
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .empresa-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f6f6f6;
+        font-family: Arial, sans-serif;
+    }
+    .empresa-form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
+    }
+    .empresa-input[type="text"], .empresa-input[type="tel"], .empresa-input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
+    .empresa-submit[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    .empresa-submit[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style>
+{% endblock %}
+
+{% block contenido %}
+<div class="container-lg">
+    <h1 class="text-center my-4">Orden de Compra</h1>
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <form id="combinedForm" action="" method="post">
+          {% csrf_token %}
+          <h3 class="my-4">Empresa</h3>
+          {{ empresaForm | crispy }}
+
+          <h3 class="my-4">Vendedor</h3>
+          {{ vendedorForm | crispy }}
+
+          <h3 class="my-4">Cliente</h3>
+          {{ clienteForm | crispy }}
+
+          <h3 class="my-4">Enviar A</h3>
+          {{ envioForm | crispy }}
+
+          <h3 class="my-4">Detalle</h3>
+          {{ facturaForm | crispy }}
+
+          <br>
+          <a href="{% url 'factura' factura.id %}" class="btn btn-primary btn-lg">Volver</a>
+          <button type="submit" class="btn btn-success btn-lg">Rectificar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <br><br>
+{% endblock %}
+
+{% block js %}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}

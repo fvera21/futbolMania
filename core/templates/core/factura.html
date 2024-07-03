@@ -170,6 +170,7 @@
         <button type="submit" class="btn btn-success btn-lg">Guardar cambios</button>
     </form>
     <td><td><a href="{% url 'orden_compra_pdf' factura.id %}" class="btn btn-primary btn-lg">Exportar PDF</a></td></td>
+    <td><td><a href="{% url 'rectificar' factura.id %}" class="btn btn-secondary btn-lg">Rectificar</a></td></td>
 </div>
 {% endblock %}
 
