@@ -262,11 +262,32 @@ def rectificar(request, id):
             vendedorForm.save()
             clienteForm.save()
             envioForm.save()
-            facturaForm.save()
 
+            #datos factura form
+            descuento = facturaForm.cleaned_data.get('descuento')
+            iva = facturaForm.cleaned_data.get('iva')
+            costoenvio = facturaForm.cleaned_data.get('costoenvio')
+
+            #calculos
+            subtotal = factura.subtotal
+            descuentoMonto = subtotal * (descuento/100)
+            ivaMonto = (subtotal - descuentoMonto) * (iva/100)
+            total = subtotal - descuentoMonto + ivaMonto + costoenvio
+
+            #actualizar factura
+            factura.subtotal = subtotal
+            factura.descuento = descuento
+            factura.descuentoMonto = descuentoMonto
+            factura.iva = iva
+            factura.ivaMonto = ivaMonto
+            factura.costoenvio = costoenvio
+            factura.total = total
             # cambiar estado
             factura.estadoModificacion = EstadoModificacion.objects.get(pk=2)
+
+            #guardar factura
             factura.save()
+            
             return redirect('factura', id=factura.id)
     else:
         empresaForm = EmpresaRectificarForm(instance=empresa, prefix='empresaForm')
