@@ -8,6 +8,7 @@ from .models import *
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
+from django.forms import modelformset_factory
 
 
 def index(request):
@@ -249,6 +250,9 @@ def rectificar(request, id):
     vendedor = factura.vendedor
     cliente = factura.cliente
     envio = factura.envio
+    productos = factura.productos.all()
+
+    ProductoFormSet = modelformset_factory(Producto, form=ProductoRectificarForm, extra=0)
 
     if request.method == 'POST':
         empresaForm = EmpresaRectificarForm(request.POST, instance=empresa, prefix='empresaForm')
@@ -256,20 +260,35 @@ def rectificar(request, id):
         clienteForm = ClienteRectificarForm(request.POST, instance=cliente, prefix='clienteForm')
         envioForm = EnvioRectificarForm(request.POST, instance=envio, prefix='envioForm')
         facturaForm = FacturaRectificarForm(request.POST, instance=factura, prefix='facturaForm')
+        productoFormSet = ProductoFormSet(request.POST, queryset=productos, prefix='productos')
+
         
-        if empresaForm.is_valid() and vendedorForm.is_valid() and clienteForm.is_valid() and envioForm.is_valid() and facturaForm.is_valid():            # Crear instancias de los modelos con los datos del formulario
+        if empresaForm.is_valid() and vendedorForm.is_valid() and clienteForm.is_valid() and envioForm.is_valid() and facturaForm.is_valid() and productoFormSet.is_valid():            # Crear instancias de los modelos con los datos del formulario
             empresaForm.save()
             vendedorForm.save()
             clienteForm.save()
             envioForm.save()
+            productoFormSet.save()
 
             #datos factura form
             descuento = facturaForm.cleaned_data.get('descuento')
             iva = facturaForm.cleaned_data.get('iva')
             costoenvio = facturaForm.cleaned_data.get('costoenvio')
 
+            # Calculos
+            subtotal = 0  # Inicializa el subtotal
+
+            # Iterar sobre cada formulario en el formset para acceder a los datos de los productos
+            for form in productoFormSet:
+                producto_data = form.cleaned_data
+                precio = producto_data.get('precio')
+                cantidad = producto_data.get('cantidad')
+                monto = precio * cantidad
+                subtotal += monto
+                form.instance.monto = monto  # Actualiza el monto en el modelo Producto
+                form.save()
+
             #calculos
-            subtotal = factura.subtotal
             descuentoMonto = subtotal * (descuento/100)
             ivaMonto = (subtotal - descuentoMonto) * (iva/100)
             total = subtotal - descuentoMonto + ivaMonto + costoenvio
@@ -287,7 +306,7 @@ def rectificar(request, id):
 
             #guardar factura
             factura.save()
-            
+
             return redirect('factura', id=factura.id)
     else:
         empresaForm = EmpresaRectificarForm(instance=empresa, prefix='empresaForm')
@@ -295,6 +314,9 @@ def rectificar(request, id):
         clienteForm = ClienteRectificarForm(instance=cliente, prefix='clienteForm')
         envioForm = EnvioRectificarForm(instance=envio, prefix='envioForm')
         facturaForm = FacturaRectificarForm(instance=factura, prefix='facturaForm')
+        productoFormSet = ProductoFormSet(queryset=productos, prefix='productos')
+
+
     
     return render(request, 'core/rectificar.html', {
         'empresaForm': empresaForm,
@@ -302,5 +324,6 @@ def rectificar(request, id):
         'clienteForm': clienteForm,
         'envioForm': envioForm,
         'facturaForm': facturaForm,
+        'productoFormSet': productoFormSet,
         'factura': factura
     })

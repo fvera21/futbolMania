@@ -111,6 +111,11 @@ class EnvioRectificarForm(forms.ModelForm):
         }
 
 class FacturaRectificarForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(FacturaRectificarForm, self).__init__(*args, **kwargs)
+        self.fields['descuento'].widget.attrs.update({'min': '0', 'max': '100'})
+        self.fields['iva'].widget.attrs.update({'min': '0', 'max': '100'})
+
     class Meta:
         model = Factura
         fields = ['descuento', 'iva', 'costoenvio']
@@ -118,4 +123,17 @@ class FacturaRectificarForm(forms.ModelForm):
             'descuento': 'Descuento (%)',
             'iva': 'IVA (%)',
             'costoenvio': 'Costo de envío',
-        } 
+        }
+
+class ProductoRectificarForm(forms.ModelForm):
+    monto = forms.CharField(widget=forms.HiddenInput())  # Define el campo monto como oculto
+
+    class Meta:
+        model = Producto
+        fields = ['codigo', 'descripcion', 'cantidad', 'precio', 'monto']
+        labels = {
+            'codigo': 'Codigo',
+            'descripcion': 'Descripción',
+            'cantidad': 'Cantidad',
+            'precio': 'Precio',
+        }
