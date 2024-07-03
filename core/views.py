@@ -320,9 +320,23 @@ def rectificar(request, id):
         'factura': factura
     })
 
-def entregar(request,id):
+def entregar(request, id):
     factura = get_object_or_404(Factura, id=id)
-    form = EntregaForm()
+    if request.method == 'POST':
+        # Instanciar el formulario con los datos de la solicitud y los archivos
+        form = EntregaForm(request.POST, request.FILES)
+        if form.is_valid():
+            entrega = form.save(commit=False)
+            entrega.save()
+
+            factura.estadoEnvio = EstadoEnvio.objects.get(pk=2)
+            factura.entrega = entrega
+            factura.save()
+
+            return redirect('factura', id=factura.id)
+    else:
+        form = EntregaForm()
+
     return render(request, 'core/entregar.html', {'form': form, 'factura': factura})
 
 def rechazar(request, id):
