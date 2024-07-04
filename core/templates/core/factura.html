@@ -177,7 +177,7 @@
                 <td>{{ factura.estadoEnvio }}</td>
                 <td>
                     {% if factura.estadoEnvio.nombre == 'Entregada' %}
-                    <a href="{% url 'entregar' factura.id %}" class="btn btn-success btn-lg disabled" >Entregar</a>  
+                    <a href="{% url 'entrega' factura.id %}" class="btn btn-success btn-lg" >Entrega</a>  
                     <a href="{% url 'historial' factura.id %}" class="btn btn-danger btn-lg">Historial</a>
                     {% elif factura.estadoEnvio.nombre == 'Rechazada' %}
                     <a href="{% url 'entregar' factura.id %}" class="btn btn-success btn-lg" >Entregar</a>

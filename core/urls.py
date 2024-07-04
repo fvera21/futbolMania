@@ -1,6 +1,8 @@
 from django.urls import path
 from .views import *
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', index, name="index"),
@@ -13,4 +15,5 @@ urlpatterns = [
     path('entregar/<int:id>/', entregar, name="entregar"),
     path('rechazar/<int:id>/', rechazar, name="rechazar"),
     path('historial/<int:id>/', historial, name="historial"),
-]
+    path('entrega/<int:id>/', entrega, name="entrega"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

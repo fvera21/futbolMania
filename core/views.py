@@ -365,3 +365,7 @@ def historial(request,id):
     factura = get_object_or_404(Factura, id=id)
     rechazos = Rechazo.objects.filter(factura=factura)
     return render(request, 'core/historial.html', {'factura': factura, 'rechazos': rechazos})
+
+def entrega(request, id):
+    factura = get_object_or_404(Factura, id=id)
+    return render(request, 'core/entrega.html', {'factura': factura})

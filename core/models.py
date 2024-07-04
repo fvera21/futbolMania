@@ -59,7 +59,7 @@ class EstadoModificacion(models.Model):
 class Entrega(models.Model):
     direccion = models.CharField(max_length=200,null=True)
     rut = models.CharField(max_length=15,null=True)
-    imagen = models.ImageField(upload_to='media/', null=True, blank=True)
+    imagen = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.direccion
@@ -83,10 +83,10 @@ class Factura(models.Model):
     ivaMonto = models.IntegerField(null=True)
     costoenvio = models.IntegerField(null=True)
     total = models.IntegerField(null=True)
-    estadoEnvio = models.ForeignKey(EstadoEnvio, on_delete=models.CASCADE,null=True, default=1)
-    estadoOrden = models.ForeignKey(EstadoOrden, on_delete=models.CASCADE,null=True, default=1)
-    estadoModificacion = models.ForeignKey(EstadoModificacion, on_delete=models.CASCADE,null=True, default=1)
-    entrega = models.ForeignKey(Entrega, on_delete=models.CASCADE, null=True)
+    estadoEnvio = models.ForeignKey(EstadoEnvio, on_delete=models.SET_NULL, null=True, default=1)
+    estadoOrden = models.ForeignKey(EstadoOrden, on_delete=models.SET_NULL, null=True, default=1)
+    estadoModificacion = models.ForeignKey(EstadoModificacion, on_delete=models.SET_NULL, null=True, default=1)
+    entrega = models.ForeignKey(Entrega, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.cliente.nombrecliente
