@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2024 a las 07:54:11
+-- Tiempo de generación: 04-07-2024 a las 05:26:27
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.28
 
@@ -114,7 +114,27 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (45, 'Can add vendedor', 12, 'add_vendedor'),
 (46, 'Can change vendedor', 12, 'change_vendedor'),
 (47, 'Can delete vendedor', 12, 'delete_vendedor'),
-(48, 'Can view vendedor', 12, 'view_vendedor');
+(48, 'Can view vendedor', 12, 'view_vendedor'),
+(49, 'Can add estado envio', 13, 'add_estadoenvio'),
+(50, 'Can change estado envio', 13, 'change_estadoenvio'),
+(51, 'Can delete estado envio', 13, 'delete_estadoenvio'),
+(52, 'Can view estado envio', 13, 'view_estadoenvio'),
+(53, 'Can add estado modificacion', 14, 'add_estadomodificacion'),
+(54, 'Can change estado modificacion', 14, 'change_estadomodificacion'),
+(55, 'Can delete estado modificacion', 14, 'delete_estadomodificacion'),
+(56, 'Can view estado modificacion', 14, 'view_estadomodificacion'),
+(57, 'Can add estado orden', 15, 'add_estadoorden'),
+(58, 'Can change estado orden', 15, 'change_estadoorden'),
+(59, 'Can delete estado orden', 15, 'delete_estadoorden'),
+(60, 'Can view estado orden', 15, 'view_estadoorden'),
+(61, 'Can add entrega', 16, 'add_entrega'),
+(62, 'Can change entrega', 16, 'change_entrega'),
+(63, 'Can delete entrega', 16, 'delete_entrega'),
+(64, 'Can view entrega', 16, 'view_entrega'),
+(65, 'Can add rechazo', 17, 'add_rechazo'),
+(66, 'Can change rechazo', 17, 'change_rechazo'),
+(67, 'Can delete rechazo', 17, 'delete_rechazo'),
+(68, 'Can view rechazo', 17, 'view_rechazo');
 
 -- --------------------------------------------------------
 
@@ -142,7 +162,8 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$216000$thboMtj2k4pg$BpeorO5TA4UmOUKnseZEJoS59ZEEI1HYZv8cowaTJ9o=', '2024-06-05 02:37:39.035148', 1, 'admin', '', '', 'ig.riffo@duocuc.cl', 1, 1, '2024-06-05 02:37:04.959240');
+(1, 'pbkdf2_sha256$216000$thboMtj2k4pg$BpeorO5TA4UmOUKnseZEJoS59ZEEI1HYZv8cowaTJ9o=', '2024-07-04 03:20:47.588956', 1, 'admin', '', '', 'ig.riffo@duocuc.cl', 1, 1, '2024-06-05 02:37:04.959240'),
+(2, 'pbkdf2_sha256$216000$miLzeQaeDRC7$NoLyHFIkVCvCTbyfzZYzOEM5wZg/Lo+c3S3B72PjID4=', '2024-06-06 02:35:30.409482', 0, 'ignacio', '', '', 'ignacio@gmail.com', 0, 1, '2024-06-06 02:35:29.917781');
 
 -- --------------------------------------------------------
 
@@ -192,7 +213,12 @@ CREATE TABLE `core_cliente` (
 
 INSERT INTO `core_cliente` (`id`, `nombrecliente`, `nombreEmpresa`, `direccion`, `telefono`, `correo`) VALUES
 (13, 'Ignacio Riffo', 'Duoc FC', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com'),
-(14, 'Francisco Vera', 'Duoc FC', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com');
+(14, 'Francisco Vera', 'Duoc FC', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com'),
+(15, 'Ignacio Riffo', 'LVFC', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com'),
+(16, 'Fabian Bravo', 'Roblox', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com'),
+(17, 'Francisco Vera', 'Duoc FC', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com'),
+(18, 'Francisco Vera', 'Duoc FC', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com'),
+(19, 'Francisco Vera', 'Colo Colo FC', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -216,7 +242,35 @@ CREATE TABLE `core_empresa` (
 
 INSERT INTO `core_empresa` (`id`, `nombreEmpresa`, `direccion`, `telefono`, `correo`, `web`) VALUES
 (14, 'GithubUC', 'Av las nieves 02196', '928384921', 'empresa@gmail.com', 'www.empresa.cl'),
-(15, 'Github Uc', 'Av las nieves 02196', '928384921', 'empresa@gmail.com', 'www.empresa.cl');
+(15, 'Github Uc', 'Av las nieves 02196', '928384921', 'empresa@gmail.com', 'www.empresa.cl'),
+(16, 'FutbolManía', 'Av las nieves 02196', '928384921', 'empresa@gmail.com', 'www.empresa.cl'),
+(17, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com'),
+(18, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com'),
+(19, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com'),
+(20, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com'),
+(21, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com'),
+(22, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `core_entrega`
+--
+
+DROP TABLE IF EXISTS `core_entrega`;
+CREATE TABLE `core_entrega` (
+  `id` int(11) NOT NULL,
+  `direccion` varchar(200) DEFAULT NULL,
+  `rut` varchar(15) DEFAULT NULL,
+  `imagen` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `core_entrega`
+--
+
+INSERT INTO `core_entrega` (`id`, `direccion`, `rut`, `imagen`) VALUES
+(6, 'Av las nieves 02196', '6504414-4', 'media/ferreteria2_UBaTbpf.jpg');
 
 -- --------------------------------------------------------
 
@@ -238,7 +292,73 @@ CREATE TABLE `core_envio` (
 
 INSERT INTO `core_envio` (`id`, `metodoenvio`, `direccionenvio`, `condicionesenvio`) VALUES
 (13, 'Starken', 'Av concha y toro 2142', 'Entrega entre 8am y 10pm'),
-(14, 'Starken', 'Av concha y toro 2142', 'No entregar antes de las 11am');
+(14, 'Starken', 'Av concha y toro 2142', 'No entregar antes de las 11am'),
+(15, 'Starken', 'Av concha y toro 2142', 'No entregar antes de las 11am'),
+(16, 'Chilexpress', 'Av concha y toro 2142', 'entrega entre 8am y 10pm'),
+(17, NULL, 'Av concha y toro 2142', NULL),
+(18, NULL, 'Av concha y toro 2142', NULL),
+(19, 'Starken', 'Av mexico 2390', 'No entregar antes de las 11am');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `core_estadoenvio`
+--
+
+DROP TABLE IF EXISTS `core_estadoenvio`;
+CREATE TABLE `core_estadoenvio` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `core_estadoenvio`
+--
+
+INSERT INTO `core_estadoenvio` (`id`, `nombre`) VALUES
+(1, 'Por entregar'),
+(2, 'Entregada'),
+(3, 'Rechazada');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `core_estadomodificacion`
+--
+
+DROP TABLE IF EXISTS `core_estadomodificacion`;
+CREATE TABLE `core_estadomodificacion` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `core_estadomodificacion`
+--
+
+INSERT INTO `core_estadomodificacion` (`id`, `nombre`) VALUES
+(1, 'Creada'),
+(2, 'Rectificada');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `core_estadoorden`
+--
+
+DROP TABLE IF EXISTS `core_estadoorden`;
+CREATE TABLE `core_estadoorden` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `core_estadoorden`
+--
+
+INSERT INTO `core_estadoorden` (`id`, `nombre`) VALUES
+(1, 'Orden de compra'),
+(2, 'Facturada');
 
 -- --------------------------------------------------------
 
@@ -259,16 +379,20 @@ CREATE TABLE `core_factura` (
   `cliente_id` int(11) DEFAULT NULL,
   `empresa_id` int(11) DEFAULT NULL,
   `envio_id` int(11) DEFAULT NULL,
-  `vendedor_id` int(11) DEFAULT NULL
+  `vendedor_id` int(11) DEFAULT NULL,
+  `estadoEnvio_id` int(11),
+  `estadoModificacion_id` int(11),
+  `estadoOrden_id` int(11),
+  `entrega_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `core_factura`
 --
 
-INSERT INTO `core_factura` (`id`, `subtotal`, `descuento`, `descuentoMonto`, `iva`, `ivaMonto`, `costoenvio`, `total`, `cliente_id`, `empresa_id`, `envio_id`, `vendedor_id`) VALUES
-(9, 409000, 10, 40900, 19, 69939, 6000, 444039, 13, 14, 13, 12),
-(10, 976000, 12, 117120, 21, 180365, 9000, 1048245, 14, 15, 14, 13);
+INSERT INTO `core_factura` (`id`, `subtotal`, `descuento`, `descuentoMonto`, `iva`, `ivaMonto`, `costoenvio`, `total`, `cliente_id`, `empresa_id`, `envio_id`, `vendedor_id`, `estadoEnvio_id`, `estadoModificacion_id`, `estadoOrden_id`, `entrega_id`) VALUES
+(13, 339850, 5, 16992, 21, 67800, 10000, 400657, 17, 20, 17, 16, 2, 2, 1, 6),
+(14, 25800, 10, 2580, 19, 4411, 3000, 30631, 18, 21, 18, 17, 1, 2, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -292,14 +416,22 @@ CREATE TABLE `core_producto` (
 --
 
 INSERT INTO `core_producto` (`id`, `codigo`, `descripcion`, `cantidad`, `precio`, `monto`, `factura_id`) VALUES
-(6, 'kss32', 'Camiseta', 3, 49000, 147000, 9),
-(7, '02amd', 'Balón', 2, 12000, 24000, 9),
-(8, 'fsl12', 'Medias', 4, 16000, 64000, 9),
-(9, 'lal12', 'Short', 6, 29000, 174000, 9),
-(10, 'dka1f', 'Camiseta', 10, 48000, 480000, 10),
-(11, 'fsk9y', 'Balón', 2, 19000, 38000, 10),
-(12, 'gl23r4', 'Zapatillas', 8, 52000, 416000, 10),
-(13, 'rn2i', 'Canilleras', 3, 14000, 42000, 10);
+(19, '43adk', 'Camiseta', 13, 23990, 311870, 13),
+(20, '02amd', 'Zapatillas', 2, 13990, 27980, 13),
+(21, 'kss32', 'Camiseta', 2, 12900, 25800, 14);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `core_rechazo`
+--
+
+DROP TABLE IF EXISTS `core_rechazo`;
+CREATE TABLE `core_rechazo` (
+  `id` int(11) NOT NULL,
+  `descripcion` longtext DEFAULT NULL,
+  `factura_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -323,7 +455,12 @@ CREATE TABLE `core_vendedor` (
 
 INSERT INTO `core_vendedor` (`id`, `nombreEmpresa`, `direccion`, `telefono`, `correo`, `web`) VALUES
 (12, '100 futbol', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl'),
-(13, 'Falabella', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl');
+(13, 'Falabella', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl'),
+(14, 'Falabella', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl'),
+(15, 'Vendedor', 'Av independencia 1923', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl'),
+(16, 'Falabella', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl'),
+(17, 'Falabella', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl'),
+(18, 'Falabella', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl');
 
 -- --------------------------------------------------------
 
@@ -413,7 +550,24 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 (63, '2024-06-05 05:52:42.489517', '6', 'kss32', 2, '[{\"changed\": {\"fields\": [\"Descripcion\"]}}]', 11, 1),
 (64, '2024-06-05 05:52:49.921837', '7', '02amd', 2, '[{\"changed\": {\"fields\": [\"Descripcion\"]}}]', 11, 1),
 (65, '2024-06-05 05:52:55.794752', '8', 'fsl12', 2, '[{\"changed\": {\"fields\": [\"Descripcion\"]}}]', 11, 1),
-(66, '2024-06-05 05:53:00.934262', '9', 'lal12', 2, '[{\"changed\": {\"fields\": [\"Descripcion\"]}}]', 11, 1);
+(66, '2024-06-05 05:53:00.934262', '9', 'lal12', 2, '[{\"changed\": {\"fields\": [\"Descripcion\"]}}]', 11, 1),
+(67, '2024-07-02 17:32:37.527309', '1', 'Por entregar', 1, '[{\"added\": {}}]', 13, 1),
+(68, '2024-07-02 17:32:54.627280', '2', 'Entregada', 1, '[{\"added\": {}}]', 13, 1),
+(69, '2024-07-02 17:33:02.729848', '3', 'Rechazada', 1, '[{\"added\": {}}]', 13, 1),
+(70, '2024-07-02 17:33:27.232049', '1', 'Orden de compra', 1, '[{\"added\": {}}]', 15, 1),
+(71, '2024-07-02 17:33:32.089851', '2', 'Facturada', 1, '[{\"added\": {}}]', 15, 1),
+(72, '2024-07-02 17:33:47.667959', '1', 'Creada', 1, '[{\"added\": {}}]', 14, 1),
+(73, '2024-07-02 17:33:53.421448', '2', 'Rectificada', 1, '[{\"added\": {}}]', 14, 1),
+(74, '2024-07-03 05:42:43.335955', '1', 'No hay personas en el domicilio.', 3, '', 17, 1),
+(75, '2024-07-03 05:43:50.636284', '2', 'No hay personas en el domicilio', 3, '', 17, 1),
+(76, '2024-07-03 05:53:17.653526', '1', 'Av las nieves 02196', 2, '[{\"changed\": {\"fields\": [\"Imagen\"]}}]', 16, 1),
+(77, '2024-07-03 06:00:32.999304', '3', 'Av las nieves 02196', 3, '', 16, 1),
+(78, '2024-07-03 06:00:33.003984', '2', 'Av las nieves 02196', 3, '', 16, 1),
+(79, '2024-07-03 06:00:33.007263', '1', 'Av las nieves 02196', 3, '', 16, 1),
+(80, '2024-07-03 06:08:30.521960', '5', 'Av las nieves 02196', 3, '', 16, 1),
+(81, '2024-07-03 06:08:30.521960', '4', 'Av las nieves 02196', 3, '', 16, 1),
+(82, '2024-07-04 03:24:37.571855', '3', 'No hay personas en el domicilio', 3, '', 17, 1),
+(83, '2024-07-04 03:25:03.688640', '9', 'Ignacio Riffo', 3, '', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -440,9 +594,14 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (5, 'contenttypes', 'contenttype'),
 (7, 'core', 'cliente'),
 (8, 'core', 'empresa'),
+(16, 'core', 'entrega'),
 (9, 'core', 'envio'),
+(13, 'core', 'estadoenvio'),
+(14, 'core', 'estadomodificacion'),
+(15, 'core', 'estadoorden'),
 (10, 'core', 'factura'),
 (11, 'core', 'producto'),
+(17, 'core', 'rechazo'),
 (12, 'core', 'vendedor'),
 (6, 'sessions', 'session');
 
@@ -489,7 +648,11 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (22, 'core', '0004_auto_20240604_2335', '2024-06-05 03:35:51.971854'),
 (23, 'core', '0005_auto_20240604_2341', '2024-06-05 03:41:25.194737'),
 (24, 'core', '0006_auto_20240604_2345', '2024-06-05 03:45:51.508024'),
-(25, 'core', '0007_auto_20240604_2353', '2024-06-05 03:54:03.721909');
+(25, 'core', '0007_auto_20240604_2353', '2024-06-05 03:54:03.721909'),
+(26, 'core', '0008_estadoenvio_estadomodificacion_estadoorden', '2024-07-02 17:29:38.494933'),
+(27, 'core', '0009_auto_20240702_1335', '2024-07-02 17:35:43.843548'),
+(28, 'core', '0010_auto_20240703_0109', '2024-07-03 05:09:16.473477'),
+(29, 'core', '0011_auto_20240703_0118', '2024-07-03 05:18:31.530341');
 
 -- --------------------------------------------------------
 
@@ -509,7 +672,8 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('7a9rgxl2bhutvq2gd9vrc2pmj5tklicf', '.eJxVjEEOwiAQRe_C2pAyg0Bduu8ZyAxMpWpoUtqV8e7apAvd_vfef6lI21ri1mSJU1YXZdTpd2NKD6k7yHeqt1mnua7LxHpX9EGbHuYsz-vh_h0UauVbMzAAYAIImEYXPHk26IDFBWvF9mjEnoWoG4MJ1HnnvDUZkZBTCr16fwDH1Tc4:1sEgWx:bjymLcB5Pvx5bn4WWbKdmjHWGb1NnCjbScAZ56G4UoM', '2024-06-19 02:37:39.040137');
+('4vvn7sk75btzarp0qvjprahuc6luwc3v', '.eJxVjDsOwjAQBe_iGlm7Xq8_lPScwfJPOIAcKU4qxN0hUgpo38y8lwhxW1vYRl3CVMRZKHH63VLMj9p3UO6x32aZ574uU5K7Ig865HUu9Xk53L-DFkf71jZ5JOcVEXtWTKwSFe01AzAzIJlkUGeEioDOoq1UrWGno9EIoMT7A3vHNPE:1sF2yQ:TZVA30xHQ-TI2MIXVrHtSPv2_AKKg0M8D_TrAr0myns', '2024-06-20 02:35:30.424952'),
+('pvhkwpubnqb7d9p6mrc7u5p0u2j0kvgo', '.eJxVjEEOwiAQRe_C2pAyg0Bduu8ZyAxMpWpoUtqV8e7apAvd_vfef6lI21ri1mSJU1YXZdTpd2NKD6k7yHeqt1mnua7LxHpX9EGbHuYsz-vh_h0UauVbMzAAYAIImEYXPHk26IDFBWvF9mjEnoWoG4MJ1HnnvDUZkZBTCr16fwDH1Tc4:1sPD1b:LxNjK6KCLTTOPG_jxs5xlxpm2v74vHAmJtCX5AO2EdM', '2024-07-18 03:20:47.588956');
 
 --
 -- Índices para tablas volcadas
@@ -573,9 +737,33 @@ ALTER TABLE `core_empresa`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `core_entrega`
+--
+ALTER TABLE `core_entrega`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `core_envio`
 --
 ALTER TABLE `core_envio`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `core_estadoenvio`
+--
+ALTER TABLE `core_estadoenvio`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `core_estadomodificacion`
+--
+ALTER TABLE `core_estadomodificacion`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `core_estadoorden`
+--
+ALTER TABLE `core_estadoorden`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -586,7 +774,11 @@ ALTER TABLE `core_factura`
   ADD KEY `core_factura_cliente_id_a3d41446_fk_core_cliente_id` (`cliente_id`),
   ADD KEY `core_factura_empresa_id_e5b3c0f5_fk_core_empresa_id` (`empresa_id`),
   ADD KEY `core_factura_envio_id_94054e6e_fk_core_envio_id` (`envio_id`),
-  ADD KEY `core_factura_vendedor_id_d88fa5c3_fk_core_vendedor_id` (`vendedor_id`);
+  ADD KEY `core_factura_vendedor_id_d88fa5c3_fk_core_vendedor_id` (`vendedor_id`),
+  ADD KEY `core_factura_estadoEnvio_id_d072fbcf_fk_core_estadoenvio_id` (`estadoEnvio_id`),
+  ADD KEY `core_factura_estadoModificacion_i_7f3ff288_fk_core_esta` (`estadoModificacion_id`),
+  ADD KEY `core_factura_estadoOrden_id_39bdcb88_fk_core_estadoorden_id` (`estadoOrden_id`),
+  ADD KEY `core_factura_entrega_id_705d03d4_fk_core_entrega_id` (`entrega_id`);
 
 --
 -- Indices de la tabla `core_producto`
@@ -594,6 +786,13 @@ ALTER TABLE `core_factura`
 ALTER TABLE `core_producto`
   ADD PRIMARY KEY (`id`),
   ADD KEY `core_producto_factura_id_316eaf83_fk_core_factura_id` (`factura_id`);
+
+--
+-- Indices de la tabla `core_rechazo`
+--
+ALTER TABLE `core_rechazo`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `core_rechazo_factura_id_3f53ae8f_fk_core_factura_id` (`factura_id`);
 
 --
 -- Indices de la tabla `core_vendedor`
@@ -649,13 +848,13 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT de la tabla `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT de la tabla `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `auth_user_groups`
@@ -673,55 +872,85 @@ ALTER TABLE `auth_user_user_permissions`
 -- AUTO_INCREMENT de la tabla `core_cliente`
 --
 ALTER TABLE `core_cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `core_empresa`
 --
 ALTER TABLE `core_empresa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT de la tabla `core_entrega`
+--
+ALTER TABLE `core_entrega`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `core_envio`
 --
 ALTER TABLE `core_envio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT de la tabla `core_estadoenvio`
+--
+ALTER TABLE `core_estadoenvio`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `core_estadomodificacion`
+--
+ALTER TABLE `core_estadomodificacion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `core_estadoorden`
+--
+ALTER TABLE `core_estadoorden`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `core_factura`
 --
 ALTER TABLE `core_factura`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `core_producto`
 --
 ALTER TABLE `core_producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT de la tabla `core_rechazo`
+--
+ALTER TABLE `core_rechazo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `core_vendedor`
 --
 ALTER TABLE `core_vendedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT de la tabla `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Restricciones para tablas volcadas
@@ -760,7 +989,11 @@ ALTER TABLE `auth_user_user_permissions`
 ALTER TABLE `core_factura`
   ADD CONSTRAINT `core_factura_cliente_id_a3d41446_fk_core_cliente_id` FOREIGN KEY (`cliente_id`) REFERENCES `core_cliente` (`id`),
   ADD CONSTRAINT `core_factura_empresa_id_e5b3c0f5_fk_core_empresa_id` FOREIGN KEY (`empresa_id`) REFERENCES `core_empresa` (`id`),
+  ADD CONSTRAINT `core_factura_entrega_id_705d03d4_fk_core_entrega_id` FOREIGN KEY (`entrega_id`) REFERENCES `core_entrega` (`id`),
   ADD CONSTRAINT `core_factura_envio_id_94054e6e_fk_core_envio_id` FOREIGN KEY (`envio_id`) REFERENCES `core_envio` (`id`),
+  ADD CONSTRAINT `core_factura_estadoEnvio_id_d072fbcf_fk_core_estadoenvio_id` FOREIGN KEY (`estadoEnvio_id`) REFERENCES `core_estadoenvio` (`id`),
+  ADD CONSTRAINT `core_factura_estadoModificacion_i_7f3ff288_fk_core_esta` FOREIGN KEY (`estadoModificacion_id`) REFERENCES `core_estadomodificacion` (`id`),
+  ADD CONSTRAINT `core_factura_estadoOrden_id_39bdcb88_fk_core_estadoorden_id` FOREIGN KEY (`estadoOrden_id`) REFERENCES `core_estadoorden` (`id`),
   ADD CONSTRAINT `core_factura_vendedor_id_d88fa5c3_fk_core_vendedor_id` FOREIGN KEY (`vendedor_id`) REFERENCES `core_vendedor` (`id`);
 
 --
@@ -768,6 +1001,12 @@ ALTER TABLE `core_factura`
 --
 ALTER TABLE `core_producto`
   ADD CONSTRAINT `core_producto_factura_id_316eaf83_fk_core_factura_id` FOREIGN KEY (`factura_id`) REFERENCES `core_factura` (`id`);
+
+--
+-- Filtros para la tabla `core_rechazo`
+--
+ALTER TABLE `core_rechazo`
+  ADD CONSTRAINT `core_rechazo_factura_id_3f53ae8f_fk_core_factura_id` FOREIGN KEY (`factura_id`) REFERENCES `core_factura` (`id`);
 
 --
 -- Filtros para la tabla `django_admin_log`
