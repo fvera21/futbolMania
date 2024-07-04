@@ -175,7 +175,19 @@
             <tr>
                 <td>Envío</td>
                 <td>{{ factura.estadoEnvio }}</td>
-                <td><a href="{% url 'entregar' factura.id %}" class="btn btn-success btn-lg">Entregar</a>  <a href="{% url 'rechazar' factura.id %}" class="btn btn-danger btn-lg">Rechazar</a></td>
+                <td>
+                    {% if factura.estadoEnvio.nombre == 'Entregada' %}
+                    <a href="{% url 'entregar' factura.id %}" class="btn btn-success btn-lg disabled" >Entregar</a>  
+                    <a href="{% url 'historial' factura.id %}" class="btn btn-danger btn-lg">Historial</a>
+                    {% elif factura.estadoEnvio.nombre == 'Rechazada' %}
+                    <a href="{% url 'entregar' factura.id %}" class="btn btn-success btn-lg" >Entregar</a>
+                    <a href="{% url 'rechazar' factura.id %}" class="btn btn-danger btn-lg">Rechazar</a>
+                    <a href="{% url 'historial' factura.id %}" class="btn btn-danger btn-lg">Historial</a>
+                    {% else %}
+                    <a href="{% url 'entregar' factura.id %}" class="btn btn-success btn-lg">Entregar</a>  
+                    <a href="{% url 'rechazar' factura.id %}" class="btn btn-danger btn-lg">Rechazar</a>
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <td>Orden de compra / Facturada</td>

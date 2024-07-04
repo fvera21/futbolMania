@@ -361,3 +361,7 @@ def rechazar(request, id):
         form = RechazoForm(initial={'factura': factura.id})
     return render(request, 'core/rechazar.html', {'form': form, 'factura': factura})
 
+def historial(request,id):
+    factura = get_object_or_404(Factura, id=id)
+    rechazos = Rechazo.objects.filter(factura=factura)
+    return render(request, 'core/historial.html', {'factura': factura, 'rechazos': rechazos})

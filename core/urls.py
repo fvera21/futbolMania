@@ -12,4 +12,5 @@ urlpatterns = [
     path('rectificar/<int:id>/', rectificar, name="rectificar"),
     path('entregar/<int:id>/', entregar, name="entregar"),
     path('rechazar/<int:id>/', rechazar, name="rechazar"),
+    path('historial/<int:id>/', historial, name="historial"),
 ]
