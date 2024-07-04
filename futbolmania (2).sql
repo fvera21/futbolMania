@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-07-2024 a las 05:26:27
+-- Tiempo de generación: 04-07-2024 a las 06:48:28
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.28
 
@@ -218,7 +218,11 @@ INSERT INTO `core_cliente` (`id`, `nombrecliente`, `nombreEmpresa`, `direccion`,
 (16, 'Fabian Bravo', 'Roblox', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com'),
 (17, 'Francisco Vera', 'Duoc FC', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com'),
 (18, 'Francisco Vera', 'Duoc FC', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com'),
-(19, 'Francisco Vera', 'Colo Colo FC', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com');
+(19, 'Francisco Vera', 'Colo Colo FC', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com'),
+(20, 'Fabian Bravo', '100% Futbol', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com'),
+(21, 'Francisco Vera', '100% Futbol', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com'),
+(22, 'Francisco Vera', '100% Futbol', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com'),
+(23, 'David Espinosa', 'DuocUC', 'Av concha y toro 2142', '927492043', 'duoc@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -249,7 +253,11 @@ INSERT INTO `core_empresa` (`id`, `nombreEmpresa`, `direccion`, `telefono`, `cor
 (19, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com'),
 (20, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com'),
 (21, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com'),
-(22, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com');
+(22, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com'),
+(23, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com'),
+(24, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com'),
+(25, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com'),
+(26, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com');
 
 -- --------------------------------------------------------
 
@@ -270,7 +278,8 @@ CREATE TABLE `core_entrega` (
 --
 
 INSERT INTO `core_entrega` (`id`, `direccion`, `rut`, `imagen`) VALUES
-(6, 'Av las nieves 02196', '6504414-4', 'media/ferreteria2_UBaTbpf.jpg');
+(7, 'Av las nieves 02196', '20452245-9', 'bodega.jpg'),
+(8, 'Av concha y toro 2142', '20435234-2', '955e7690f1ee02b264dd2bdf6faace06.jpeg');
 
 -- --------------------------------------------------------
 
@@ -297,7 +306,11 @@ INSERT INTO `core_envio` (`id`, `metodoenvio`, `direccionenvio`, `condicionesenv
 (16, 'Chilexpress', 'Av concha y toro 2142', 'entrega entre 8am y 10pm'),
 (17, NULL, 'Av concha y toro 2142', NULL),
 (18, NULL, 'Av concha y toro 2142', NULL),
-(19, 'Starken', 'Av mexico 2390', 'No entregar antes de las 11am');
+(19, 'Starken', 'Av mexico 2390', 'No entregar antes de las 11am'),
+(20, 'Starken', 'Av concha y toro 2142', 'No entregar antes de las 11am'),
+(21, 'Starken', 'Av concha y toro 2142', 'No entregar antes de las 11am'),
+(22, 'Starken', 'Av concha y toro 2142', 'No entregar antes de las 11am'),
+(23, NULL, 'Av concha y toro 2142', NULL);
 
 -- --------------------------------------------------------
 
@@ -391,8 +404,10 @@ CREATE TABLE `core_factura` (
 --
 
 INSERT INTO `core_factura` (`id`, `subtotal`, `descuento`, `descuentoMonto`, `iva`, `ivaMonto`, `costoenvio`, `total`, `cliente_id`, `empresa_id`, `envio_id`, `vendedor_id`, `estadoEnvio_id`, `estadoModificacion_id`, `estadoOrden_id`, `entrega_id`) VALUES
-(13, 339850, 5, 16992, 21, 67800, 10000, 400657, 17, 20, 17, 16, 2, 2, 1, 6),
-(14, 25800, 10, 2580, 19, 4411, 3000, 30631, 18, 21, 18, 17, 1, 2, 1, NULL);
+(14, 25800, 10, 2580, 19, 4411, 3000, 30631, 18, 21, 18, 17, 1, 2, 1, NULL),
+(16, 199940, 5, 9997, 19, 36089, 6000, 232032, 20, 23, 20, 19, 3, 1, 2, NULL),
+(17, 384000, 12, 46080, 19, 64205, 20000, 422125, 22, 25, 22, 21, 2, 1, 2, 7),
+(18, 2033700, 12, 244044, 21, 375827, 34000, 2199483, 23, 26, 23, 22, 2, 2, 2, 8);
 
 -- --------------------------------------------------------
 
@@ -416,9 +431,12 @@ CREATE TABLE `core_producto` (
 --
 
 INSERT INTO `core_producto` (`id`, `codigo`, `descripcion`, `cantidad`, `precio`, `monto`, `factura_id`) VALUES
-(19, '43adk', 'Camiseta', 13, 23990, 311870, 13),
-(20, '02amd', 'Zapatillas', 2, 13990, 27980, 13),
-(21, 'kss32', 'Camiseta', 2, 12900, 25800, 14);
+(21, 'kss32', 'Camiseta', 2, 12900, 25800, 14),
+(23, '43adk', 'Camiseta', 2, 19990, 39980, 16),
+(24, 'fsk9y', 'Zapatillas', 4, 39990, 159960, 16),
+(25, 'lsls', 'Camiseta', 32, 12000, 384000, 17),
+(26, '43adk', 'Conjunto Buzo', 12, 56990, 683880, 18),
+(27, 'fksa', 'Zapatillas', 18, 74990, 1349820, 18);
 
 -- --------------------------------------------------------
 
@@ -432,6 +450,18 @@ CREATE TABLE `core_rechazo` (
   `descripcion` longtext DEFAULT NULL,
   `factura_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `core_rechazo`
+--
+
+INSERT INTO `core_rechazo` (`id`, `descripcion`, `factura_id`) VALUES
+(4, 'No hay nadie en el domicilio', 16),
+(5, 'Direccion incorrecta', 16),
+(6, 'No hay respuesta desde el domicilio indicado', 16),
+(7, 'No se encuentra el domicilio', 18),
+(8, 'Cliente no responde su telefono', 18),
+(9, 'No hay personas en el domicilio', 18);
 
 -- --------------------------------------------------------
 
@@ -460,7 +490,11 @@ INSERT INTO `core_vendedor` (`id`, `nombreEmpresa`, `direccion`, `telefono`, `co
 (15, 'Vendedor', 'Av independencia 1923', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl'),
 (16, 'Falabella', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl'),
 (17, 'Falabella', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl'),
-(18, 'Falabella', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl');
+(18, 'Falabella', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl'),
+(19, 'Falabella', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl'),
+(20, 'Falabella', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl'),
+(21, 'Falabella', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl'),
+(22, 'Paris', 'Av independencia 2132', '938293431', 'paris@gmail.com', 'www.paris.cl');
 
 -- --------------------------------------------------------
 
@@ -567,7 +601,10 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 (80, '2024-07-03 06:08:30.521960', '5', 'Av las nieves 02196', 3, '', 16, 1),
 (81, '2024-07-03 06:08:30.521960', '4', 'Av las nieves 02196', 3, '', 16, 1),
 (82, '2024-07-04 03:24:37.571855', '3', 'No hay personas en el domicilio', 3, '', 17, 1),
-(83, '2024-07-04 03:25:03.688640', '9', 'Ignacio Riffo', 3, '', 10, 1);
+(83, '2024-07-04 03:25:03.688640', '9', 'Ignacio Riffo', 3, '', 10, 1),
+(84, '2024-07-04 04:06:13.234986', '6', 'Av las nieves 02196', 3, '', 16, 1),
+(85, '2024-07-04 04:29:33.842319', '7', 'Av las nieves 02196', 2, '[{\"changed\": {\"fields\": [\"Imagen\"]}}]', 16, 1),
+(86, '2024-07-04 04:29:59.805310', '7', 'Av las nieves 02196', 2, '[{\"changed\": {\"fields\": [\"Rut\"]}}]', 16, 1);
 
 -- --------------------------------------------------------
 
@@ -652,7 +689,8 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (26, 'core', '0008_estadoenvio_estadomodificacion_estadoorden', '2024-07-02 17:29:38.494933'),
 (27, 'core', '0009_auto_20240702_1335', '2024-07-02 17:35:43.843548'),
 (28, 'core', '0010_auto_20240703_0109', '2024-07-03 05:09:16.473477'),
-(29, 'core', '0011_auto_20240703_0118', '2024-07-03 05:18:31.530341');
+(29, 'core', '0011_auto_20240703_0118', '2024-07-03 05:18:31.530341'),
+(30, 'core', '0012_auto_20240704_0014', '2024-07-04 04:15:04.670104');
 
 -- --------------------------------------------------------
 
@@ -775,10 +813,10 @@ ALTER TABLE `core_factura`
   ADD KEY `core_factura_empresa_id_e5b3c0f5_fk_core_empresa_id` (`empresa_id`),
   ADD KEY `core_factura_envio_id_94054e6e_fk_core_envio_id` (`envio_id`),
   ADD KEY `core_factura_vendedor_id_d88fa5c3_fk_core_vendedor_id` (`vendedor_id`),
+  ADD KEY `core_factura_entrega_id_705d03d4_fk_core_entrega_id` (`entrega_id`),
   ADD KEY `core_factura_estadoEnvio_id_d072fbcf_fk_core_estadoenvio_id` (`estadoEnvio_id`),
   ADD KEY `core_factura_estadoModificacion_i_7f3ff288_fk_core_esta` (`estadoModificacion_id`),
-  ADD KEY `core_factura_estadoOrden_id_39bdcb88_fk_core_estadoorden_id` (`estadoOrden_id`),
-  ADD KEY `core_factura_entrega_id_705d03d4_fk_core_entrega_id` (`entrega_id`);
+  ADD KEY `core_factura_estadoOrden_id_39bdcb88_fk_core_estadoorden_id` (`estadoOrden_id`);
 
 --
 -- Indices de la tabla `core_producto`
@@ -872,25 +910,25 @@ ALTER TABLE `auth_user_user_permissions`
 -- AUTO_INCREMENT de la tabla `core_cliente`
 --
 ALTER TABLE `core_cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `core_empresa`
 --
 ALTER TABLE `core_empresa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `core_entrega`
 --
 ALTER TABLE `core_entrega`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `core_envio`
 --
 ALTER TABLE `core_envio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `core_estadoenvio`
@@ -914,31 +952,31 @@ ALTER TABLE `core_estadoorden`
 -- AUTO_INCREMENT de la tabla `core_factura`
 --
 ALTER TABLE `core_factura`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `core_producto`
 --
 ALTER TABLE `core_producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `core_rechazo`
 --
 ALTER TABLE `core_rechazo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `core_vendedor`
 --
 ALTER TABLE `core_vendedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT de la tabla `django_content_type`
@@ -950,7 +988,7 @@ ALTER TABLE `django_content_type`
 -- AUTO_INCREMENT de la tabla `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Restricciones para tablas volcadas
