@@ -192,7 +192,7 @@
             <tr>
                 <td>Orden de compra / Facturada</td>
                 <td>{{ factura.estadoOrden }}</td>
-                <td><a href="{% url 'rectificar' factura.id %}" class="btn btn-info btn-lg">Orden de Compra</a>  <a href="{% url 'rectificar' factura.id %}" class="btn btn-info btn-lg">Facturada</a></td>
+                <td><a href="{% url 'ordenCompraEstado' factura.id %}" class="btn btn-info btn-lg">Orden de Compra</a>  <a href="{% url 'facturadaEstado' factura.id %}" class="btn btn-info btn-lg">Facturada</a></td>
             </tr>          
             <tr>
                 <td>Creada / Rectificada</td>

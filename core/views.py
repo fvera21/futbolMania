@@ -369,3 +369,15 @@ def historial(request,id):
 def entrega(request, id):
     factura = get_object_or_404(Factura, id=id)
     return render(request, 'core/entrega.html', {'factura': factura})
+
+def ordenCompraEstado(request, id):
+    factura = get_object_or_404(Factura, id=id)
+    factura.estadoOrden = EstadoOrden.objects.get(pk=1)
+    factura.save()
+    return redirect('factura', id=factura.id)
+
+def facturadaEstado(request, id):
+    factura = get_object_or_404(Factura, id=id)
+    factura.estadoOrden = EstadoOrden.objects.get(pk=2)
+    factura.save()
+    return redirect('factura', id=factura.id)

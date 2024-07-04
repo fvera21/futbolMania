@@ -16,4 +16,6 @@ urlpatterns = [
     path('rechazar/<int:id>/', rechazar, name="rechazar"),
     path('historial/<int:id>/', historial, name="historial"),
     path('entrega/<int:id>/', entrega, name="entrega"),
+    path('ordenCompraEstado/<int:id>/', ordenCompraEstado, name="ordenCompraEstado"),
+    path('facturadaEstado/<int:id>/', facturadaEstado, name="facturadaEstado"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
