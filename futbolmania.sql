@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-07-2024 a las 21:41:36
+-- Tiempo de generación: 16-07-2024 a las 21:46:46
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `futbolmania`
 --
+CREATE DATABASE IF NOT EXISTS `futbolmania` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `futbolmania`;
 
 -- --------------------------------------------------------
 
@@ -27,6 +29,7 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `auth_group`
 --
 
+DROP TABLE IF EXISTS `auth_group`;
 CREATE TABLE `auth_group` (
   `id` int(11) NOT NULL,
   `name` varchar(150) NOT NULL
@@ -38,6 +41,7 @@ CREATE TABLE `auth_group` (
 -- Estructura de tabla para la tabla `auth_group_permissions`
 --
 
+DROP TABLE IF EXISTS `auth_group_permissions`;
 CREATE TABLE `auth_group_permissions` (
   `id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL,
@@ -50,6 +54,7 @@ CREATE TABLE `auth_group_permissions` (
 -- Estructura de tabla para la tabla `auth_permission`
 --
 
+DROP TABLE IF EXISTS `auth_permission`;
 CREATE TABLE `auth_permission` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -141,6 +146,7 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 -- Estructura de tabla para la tabla `auth_user`
 --
 
+DROP TABLE IF EXISTS `auth_user`;
 CREATE TABLE `auth_user` (
   `id` int(11) NOT NULL,
   `password` varchar(128) NOT NULL,
@@ -169,6 +175,7 @@ INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `userna
 -- Estructura de tabla para la tabla `auth_user_groups`
 --
 
+DROP TABLE IF EXISTS `auth_user_groups`;
 CREATE TABLE `auth_user_groups` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -181,6 +188,7 @@ CREATE TABLE `auth_user_groups` (
 -- Estructura de tabla para la tabla `auth_user_user_permissions`
 --
 
+DROP TABLE IF EXISTS `auth_user_user_permissions`;
 CREATE TABLE `auth_user_user_permissions` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -193,6 +201,7 @@ CREATE TABLE `auth_user_user_permissions` (
 -- Estructura de tabla para la tabla `core_cliente`
 --
 
+DROP TABLE IF EXISTS `core_cliente`;
 CREATE TABLE `core_cliente` (
   `id` int(11) NOT NULL,
   `nombrecliente` varchar(100) NOT NULL,
@@ -225,6 +234,7 @@ INSERT INTO `core_cliente` (`id`, `nombrecliente`, `nombreEmpresa`, `direccion`,
 -- Estructura de tabla para la tabla `core_empresa`
 --
 
+DROP TABLE IF EXISTS `core_empresa`;
 CREATE TABLE `core_empresa` (
   `id` int(11) NOT NULL,
   `nombreEmpresa` varchar(100) NOT NULL,
@@ -259,6 +269,7 @@ INSERT INTO `core_empresa` (`id`, `nombreEmpresa`, `direccion`, `telefono`, `cor
 -- Estructura de tabla para la tabla `core_entrega`
 --
 
+DROP TABLE IF EXISTS `core_entrega`;
 CREATE TABLE `core_entrega` (
   `id` int(11) NOT NULL,
   `direccion` varchar(200) DEFAULT NULL,
@@ -281,6 +292,7 @@ INSERT INTO `core_entrega` (`id`, `direccion`, `rut`, `imagen`) VALUES
 -- Estructura de tabla para la tabla `core_envio`
 --
 
+DROP TABLE IF EXISTS `core_envio`;
 CREATE TABLE `core_envio` (
   `id` int(11) NOT NULL,
   `metodoenvio` varchar(100) DEFAULT NULL,
@@ -311,6 +323,7 @@ INSERT INTO `core_envio` (`id`, `metodoenvio`, `direccionenvio`, `condicionesenv
 -- Estructura de tabla para la tabla `core_estadoenvio`
 --
 
+DROP TABLE IF EXISTS `core_estadoenvio`;
 CREATE TABLE `core_estadoenvio` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL
@@ -331,6 +344,7 @@ INSERT INTO `core_estadoenvio` (`id`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `core_estadomodificacion`
 --
 
+DROP TABLE IF EXISTS `core_estadomodificacion`;
 CREATE TABLE `core_estadomodificacion` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL
@@ -351,6 +365,7 @@ INSERT INTO `core_estadomodificacion` (`id`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `core_estadoorden`
 --
 
+DROP TABLE IF EXISTS `core_estadoorden`;
 CREATE TABLE `core_estadoorden` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL
@@ -370,6 +385,7 @@ INSERT INTO `core_estadoorden` (`id`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `core_factura`
 --
 
+DROP TABLE IF EXISTS `core_factura`;
 CREATE TABLE `core_factura` (
   `id` int(11) NOT NULL,
   `subtotal` int(11) DEFAULT NULL,
@@ -406,6 +422,7 @@ INSERT INTO `core_factura` (`id`, `subtotal`, `descuento`, `descuentoMonto`, `iv
 -- Estructura de tabla para la tabla `core_historialestado`
 --
 
+DROP TABLE IF EXISTS `core_historialestado`;
 CREATE TABLE `core_historialestado` (
   `id` int(11) NOT NULL,
   `fecha` datetime(6) NOT NULL,
@@ -419,6 +436,7 @@ CREATE TABLE `core_historialestado` (
 -- Estructura de tabla para la tabla `core_producto`
 --
 
+DROP TABLE IF EXISTS `core_producto`;
 CREATE TABLE `core_producto` (
   `id` int(11) NOT NULL,
   `codigo` varchar(100) NOT NULL,
@@ -447,6 +465,7 @@ INSERT INTO `core_producto` (`id`, `codigo`, `descripcion`, `cantidad`, `precio`
 -- Estructura de tabla para la tabla `core_rechazo`
 --
 
+DROP TABLE IF EXISTS `core_rechazo`;
 CREATE TABLE `core_rechazo` (
   `id` int(11) NOT NULL,
   `descripcion` longtext DEFAULT NULL,
@@ -471,6 +490,7 @@ INSERT INTO `core_rechazo` (`id`, `descripcion`, `factura_id`) VALUES
 -- Estructura de tabla para la tabla `core_vendedor`
 --
 
+DROP TABLE IF EXISTS `core_vendedor`;
 CREATE TABLE `core_vendedor` (
   `id` int(11) NOT NULL,
   `nombreEmpresa` varchar(100) NOT NULL,
@@ -503,6 +523,7 @@ INSERT INTO `core_vendedor` (`id`, `nombreEmpresa`, `direccion`, `telefono`, `co
 -- Estructura de tabla para la tabla `django_admin_log`
 --
 
+DROP TABLE IF EXISTS `django_admin_log`;
 CREATE TABLE `django_admin_log` (
   `id` int(11) NOT NULL,
   `action_time` datetime(6) NOT NULL,
@@ -612,6 +633,7 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 -- Estructura de tabla para la tabla `django_content_type`
 --
 
+DROP TABLE IF EXISTS `django_content_type`;
 CREATE TABLE `django_content_type` (
   `id` int(11) NOT NULL,
   `app_label` varchar(100) NOT NULL,
@@ -648,6 +670,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 -- Estructura de tabla para la tabla `django_migrations`
 --
 
+DROP TABLE IF EXISTS `django_migrations`;
 CREATE TABLE `django_migrations` (
   `id` int(11) NOT NULL,
   `app` varchar(255) NOT NULL,
@@ -699,6 +722,7 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 -- Estructura de tabla para la tabla `django_session`
 --
 
+DROP TABLE IF EXISTS `django_session`;
 CREATE TABLE `django_session` (
   `session_key` varchar(40) NOT NULL,
   `session_data` longtext NOT NULL,
