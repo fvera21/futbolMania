@@ -19,13 +19,19 @@
         border: 1px solid black;
         color: black;
     }
-    .estado-anulada {
+    .estado-rechazada {
         background-color: red;
         border: 1px solid black;
         color: white;
     }
-    .estado-desconocido {
-        background-color: gray;
+    .estado-facturada {
+        background-color: rgb(95, 0, 183);
+        border: 1px solid black;
+        color: white;
+    }
+
+    .estado-orden {
+        background-color: rgb(0, 146, 183);
         border: 1px solid black;
         color: white;
     }
@@ -53,7 +59,9 @@
               <th scope="col">Descuento</th>
               <th scope="col">IVA</th>
               <th scope="col">Total</th>
-              <th scope="col">Estado</th>
+              <th scope="col">Estados</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
               <th scope="col"></th>
           </tr>
       </thead>
@@ -71,6 +79,16 @@
             <td>
                 <button class="btn estado-{{ factura.estadoModificacion.nombre|lower }} btn-sm" style="pointer-events:none;">
                     {{ factura.estadoModificacion.nombre|default:'Desconocido' }}
+                </button>
+            </td>
+            <td>
+                <button class="btn estado-{{ factura.estadoOrden.nombre|lower }} btn-sm" style="pointer-events:none;">
+                    {{ factura.estadoOrden.nombre|default:'Desconocido' }}
+                </button>
+            </td>
+            <td>
+                <button class="btn estado-{{ factura.estadoEnvio.nombre|lower }} btn-sm" style="pointer-events:none;">
+                    {{ factura.estadoEnvio.nombre|default:'Desconocido' }}
                 </button>
             </td>
             <td><a href="{% url 'factura' factura.id %}" class="btn btn-primary btn-sm">Ver Más</a></td>
