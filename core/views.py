@@ -353,10 +353,34 @@ def agregar_producto(request, id):
         form = ProductoRectificarForm()
     return render(request, 'core/agregar_producto.html', {'form': form, 'factura': factura})
 
-def eliminar_producto(request, id, producto_id):
-    producto = get_object_or_404(Producto, id=producto_id)
+def eliminar_producto(request, id):
+    producto = get_object_or_404(Producto, id=id)
+    id_factura = producto.factura.id
+    factura = get_object_or_404(Factura, id=id_factura)
+
+    # Datos factura form
+    descuento = factura.descuento
+    iva = factura.iva
+    costoenvio = factura.costoenvio
+
+    subtotal = factura.subtotal - producto.monto
+
+    # Calculos
+    descuentoMonto = subtotal * (descuento / 100)
+    ivaMonto = (subtotal - descuentoMonto) * (iva / 100)
+    total = subtotal - descuentoMonto + ivaMonto + costoenvio
+
+    # Actualizar factura
+    factura.subtotal = subtotal
+    factura.descuentoMonto = descuentoMonto
+    factura.ivaMonto = ivaMonto
+    factura.total = total
+
+    factura.estadoModificacion = EstadoModificacion.objects.get(pk=2)
+    factura.save()
+
     producto.delete()
-    return redirect('rectificar', id=id)
+    return redirect('rectificar', id=id_factura)
 
 def entregar(request, id):
     factura = get_object_or_404(Factura, id=id)
