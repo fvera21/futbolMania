@@ -102,3 +102,13 @@ class Producto(models.Model):
 
     def __str__(self):
         return self.codigo
+    
+class HistorialEstado(models.Model):
+    factura = models.ForeignKey(Factura, on_delete=models.CASCADE)
+    estado = models.ForeignKey(EstadoOrden, on_delete=models.SET_NULL, null=True)
+    fecha = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.factura} - {self.estado.nombre} - {self.fecha}"
+    
+

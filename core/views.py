@@ -401,3 +401,27 @@ def anular_factura(request, id):
     factura.estadoModificacion = estado_anulado
     factura.save()
     return redirect('factura', id=factura.id)
+
+
+def historialEstados(request, id):
+    factura = get_object_or_404(Factura, id=id)
+    historial = HistorialEstado.objects.filter(factura=factura)
+
+    return render(request, 'core/historialEstados.html', {'factura': factura, 'historial': historial})
+
+def estado_facturas(request):
+    estados_facturas = EstadoOrden.objects.all()
+    estados_envio = EstadoEnvio.objects.all()
+
+    conteos = {}
+    
+    for estado in estados_facturas:
+        conteos[estado.nombre] = Factura.objects.filter(estadoOrden=estado).count()
+
+    for estado in estados_envio:
+        conteos[estado.nombre] = conteos.get(estado.nombre, 0) + Factura.objects.filter(estadoEnvio=estado).count()
+
+    return render(request, 'core/estado_facturas.html', {'conteos': conteos})
+
+
+

@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block css %}
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block contenido %}
+<h1>Historial de Estados de la Factura {{ factura.id }}</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Estado</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in historial %}
+        <tr>
+            <td>{{ entry.estado.nombre }}</td>
+            <td>{{ entry.fecha }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'index' %}">Volver</a>
+
+
+{% endblock %}
+
+{% block js %}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}

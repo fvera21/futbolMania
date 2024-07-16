@@ -3,6 +3,20 @@
 
 {% block css %}
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+      .estado-creada {
+          background-color: yellow;
+      }
+
+      .estado-rectificada {
+          background-color: orange;
+      }
+
+      .estado-entregada {
+          background-color: lightgreen;
+        
+      }
+  </style>
 {% endblock %}
 
 {% block contenido %}
@@ -25,7 +39,7 @@
       </thead>
       <tbody>
         {% for factura in facturas %}
-        <tr>
+        <tr class="{% if factura.estadoOrden.nombre == 'Creada' %}estado-creada{% elif factura.estadoOrden.nombre == 'Rectificada' %}estado-rectificada{% elif factura.estadoOrden.nombre == 'Entregada' %}estado-entregada{% endif %}">
             <td>{{ factura.empresa }}</td>
             <td>{{ factura.vendedor }}</td>
             <td>{{ factura.cliente }}</td>
@@ -35,7 +49,7 @@
             <td>{{ factura.iva }}%</td>
             <td>{{ factura.total }}</td>
             <td><a href="{% url 'factura' factura.id %}" class="btn btn-primary btn-sm">Ver Más</a></td>
-            <td><td><a href="{% url 'orden_compra_pdf' factura.id %}" class="btn btn-info">Exportar PDF</a></td></td>
+            <td><a href="{% url 'orden_compra_pdf' factura.id %}" class="btn btn-info">Exportar PDF</a></td>
         </tr>
         {% endfor %}
       </tbody>
@@ -43,8 +57,8 @@
   <a href="{% url 'ordenCompra' %}" class="btn btn-success">Agregar orden de compra</a>
 </div>
 
-
 {% endblock %}
+
 
 {% block js %}
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
