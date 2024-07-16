@@ -9,6 +9,8 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from django.forms import modelformset_factory
+from django.db.models import ObjectDoesNotExist
+from reportlab.lib import colors
 
 
 def index(request):
@@ -232,9 +234,17 @@ def orden_compra_pdf(request, factura_id):
     y -= 30
 
     p.setFont("Helvetica-Bold", 10)
-    
+    if factura.estadoModificacion.nombre == "Anulada":  # Reemplazar 'status' por el campo correcto
+        p.setFont("Helvetica-Bold", 80)
+        p.setFillColor(colors.red)
+        p.saveState()  # Guarda el estado actual del canvas para poder restaurarlo después
+        p.translate(letter[0] / 2, letter[1] / 2)  # Centra el texto en la página
+        p.rotate(45)  # Rota el texto 45 grados para que cruce la página
+        p.drawCentredString(0, 0, "ANULADA")  # Dibuja el texto "ANULADA" en el centro de la rotación
+        p.restoreState()  # Restaura el estado del canvas para continuar con el contenido normal
     p.save()
     return response
+
 
 def rectificar(request, id):
     factura = get_object_or_404(Factura, id=id)
@@ -379,5 +389,15 @@ def ordenCompraEstado(request, id):
 def facturadaEstado(request, id):
     factura = get_object_or_404(Factura, id=id)
     factura.estadoOrden = EstadoOrden.objects.get(pk=2)
+    factura.save()
+    return redirect('factura', id=factura.id)
+
+def anular_factura(request, id):
+    factura = get_object_or_404(Factura, pk=id)
+    try:
+        estado_anulado = EstadoModificacion.objects.get(nombre='Anulada')
+    except ObjectDoesNotExist:
+        estado_anulado = EstadoModificacion.objects.create(nombre='Anulada')
+    factura.estadoModificacion = estado_anulado
     factura.save()
     return redirect('factura', id=factura.id)

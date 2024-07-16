@@ -12,6 +12,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('orden_compra_pdf/<int:factura_id>/', orden_compra_pdf, name='orden_compra_pdf'),
     path('rectificar/<int:id>/', rectificar, name="rectificar"),
+    path('anular/<int:id>/', views.anular_factura, name="anular"), 
     path('entregar/<int:id>/', entregar, name="entregar"),
     path('rechazar/<int:id>/', rechazar, name="rechazar"),
     path('historial/<int:id>/', historial, name="historial"),

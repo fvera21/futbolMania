@@ -195,7 +195,7 @@
                 <td><a href="{% url 'ordenCompraEstado' factura.id %}" class="btn btn-info btn-lg">Orden de Compra</a>  <a href="{% url 'facturadaEstado' factura.id %}" class="btn btn-info btn-lg">Facturada</a></td>
             </tr>          
             <tr>
-                <td>Creada / Rectificada</td>
+                <td>Creada / Rectificada / Anulada</td>
                 <td>{{ factura.estadoModificacion }}</td>
                 <td></td>
             </tr>
@@ -203,6 +203,7 @@
     </table>
     <td><td><a href="{% url 'orden_compra_pdf' factura.id %}" class="btn btn-primary btn-lg">Exportar PDF</a></td></td>
     <td><td><a href="{% url 'rectificar' factura.id %}" class="btn btn-secondary btn-lg">Rectificar</a></td></td>
+    <td><a href="{% url 'anular' factura.id %}" class="btn btn-danger btn-lg">Anular</a></td>
 </div>
 {% endblock %}
 

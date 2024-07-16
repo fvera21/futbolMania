@@ -86,6 +86,7 @@ class Factura(models.Model):
     estadoEnvio = models.ForeignKey(EstadoEnvio, on_delete=models.SET_NULL, null=True, default=1)
     estadoOrden = models.ForeignKey(EstadoOrden, on_delete=models.SET_NULL, null=True, default=1)
     estadoModificacion = models.ForeignKey(EstadoModificacion, on_delete=models.SET_NULL, null=True, default=1)
+    anulada = models.BooleanField(default=False)
     entrega = models.ForeignKey(Entrega, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
