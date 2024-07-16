@@ -23,4 +23,5 @@ urlpatterns = [
     path('facturadaEstado/<int:id>/', facturadaEstado, name="facturadaEstado"),
     path('historialEstados/<int:id>/', historialEstados, name='historialEstados'),
     path('estado_facturas/', estado_facturas, name='estado_facturas'),
+    path('agregar_producto/', agregar_producto, name='agregar_producto'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

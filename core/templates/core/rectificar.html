@@ -57,11 +57,11 @@
                     {% endfor %}
                 </div>
 
-                <button type="button" class="btn btn-primary btn-lg" id="agregar-producto">Agregar Producto</button>
+                <td><a href="{% url 'agregar_producto' factura.id %}" class="btn btn-success btn-lg my-2">Agregar Producto</a></td>
 
                 <br>
                 <a href="{% url 'factura' factura.id %}" class="btn btn-primary btn-lg">Volver</a>
-                <button type="submit" class="btn btn-success btn-lg">Rectificar</button>
+                <button type="submit" class="btn btn-warning btn-lg">Rectificar</button>
             </form>
         </div>
     </div>
@@ -73,37 +73,5 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-      var formsetContainer = document.getElementById("productos");
-      var totalForms = document.getElementById("id_productoformset-TOTAL_FORMS");
 
-      // Manejar la adición de productos
-      document.getElementById("agregar-producto").addEventListener("click", function() {
-          var currentFormCount = parseInt(totalForms.value);
-          var newForm = document.createElement("div");
-          newForm.classList.add("producto-form");
-          var formHTML = `{{ productoFormSet.empty_form|crispy }}`;
-          formHTML = formHTML.replace(/__prefix__/g, currentFormCount);
-          newForm.innerHTML = formHTML + '<button type="button" class="btn btn-danger btn-sm eliminar-producto">Eliminar</button>';
-          formsetContainer.appendChild(newForm);
-          totalForms.value = currentFormCount + 1;
-
-          // Añadir event listener al botón de eliminar en el nuevo formulario
-          newForm.querySelector(".eliminar-producto").addEventListener("click", function() {
-              newForm.remove();
-              totalForms.value = parseInt(totalForms.value) - 1;
-          });
-      });
-
-      // Manejar la eliminación de productos existentes
-      document.querySelectorAll(".eliminar-producto").forEach(function(button) {
-          button.addEventListener("click", function() {
-              var formToDelete = button.closest(".producto-form");
-              formToDelete.remove();
-              totalForms.value = parseInt(totalForms.value) - 1;
-          });
-      });
-  });
-</script>
 {% endblock %}

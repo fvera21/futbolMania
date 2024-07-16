@@ -315,6 +315,7 @@ def rectificar(request, id):
         'factura': factura
     })
 
+
 def agregar_producto(request, id):
     factura = get_object_or_404(Factura, id=id)
 
@@ -322,12 +323,34 @@ def agregar_producto(request, id):
         form = ProductoRectificarForm(request.POST)
         if form.is_valid():
             producto = form.save(commit=False)
+            producto.monto = producto.cantidad * producto.precio
             producto.factura = factura
             producto.save()
+
+            # Datos factura form
+            descuento = factura.descuento
+            iva = factura.iva
+            costoenvio = factura.costoenvio
+
+            subtotal = factura.subtotal + producto.monto
+
+            # Calculos
+            descuentoMonto = subtotal * (descuento / 100)
+            ivaMonto = (subtotal - descuentoMonto) * (iva / 100)
+            total = subtotal - descuentoMonto + ivaMonto + costoenvio
+
+            # Actualizar factura
+            factura.subtotal = subtotal
+            factura.descuentoMonto = descuentoMonto
+            factura.ivaMonto = ivaMonto
+            factura.total = total
+
+            factura.estadoModificacion = EstadoModificacion.objects.get(pk=2)
+            factura.save()
+
             return redirect('rectificar', id=id)
     else:
         form = ProductoRectificarForm()
-
     return render(request, 'core/agregar_producto.html', {'form': form, 'factura': factura})
 
 def eliminar_producto(request, id, producto_id):
