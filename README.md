@@ -14,10 +14,10 @@
   - Abre tu navegador web y navega a la página del repositorio en GitHub.
   - Haz clic en el botón "Code" y copia la URL del repositorio.
   - Abre una terminal (Command Prompt)
-  - Usa el comando `git clone [URL_del_repositorio]` para clonar el repositorio en tu ordenador. Reemplaza `[URL_del_repositorio]` con la URL que copiaste.
+  - Usa el comando `git clone https://github.com/fvera21/futbolMania.git` para clonar el repositorio en tu ordenador.
   
   ```bash
-  git clone https://github.com/usuario/nombre-del-repositorio.git
+  git clone https://github.com/fvera21/futbolMania.git
   ```
 
 ### 2. Abrir el repositorio en Visual Studio Code
