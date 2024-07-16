@@ -202,8 +202,10 @@
         </tbody>
     </table>
     <td><td><a href="{% url 'orden_compra_pdf' factura.id %}" class="btn btn-primary btn-lg">Exportar PDF</a></td></td>
+    {% if factura.estadoModificacion.nombre != 'Anulada' %}
     <td><td><a href="{% url 'rectificar' factura.id %}" class="btn btn-secondary btn-lg">Rectificar</a></td></td>
     <td><a href="{% url 'anular' factura.id %}" class="btn btn-danger btn-lg">Anular</a></td>
+    {% endif %}
 </div>
 {% endblock %}
 
