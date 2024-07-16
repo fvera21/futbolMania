@@ -77,7 +77,11 @@
     <h1><a href="{% url 'login' %}" class="nav-link {% if active_tab == 'login' %}active{% endif %}">Ingresar <i class="fas fa-sign-in-alt"></i></a></h1>
     {% endif %}
     <h1><a href="{% url 'index' %}" class="nav-link {% if active_tab == 'index' %}active{% endif %}">Facturas <i class="fas fa-file-invoice"></i></a></h1>
-    <h1><a href="{% url 'estado_facturas'%}" class="nav-link {% if active_tab == 'index' %}active{% endif %}">Historial</a></h1>
+    <h1 class="d-flex justify-content-between align-items-center">
+      <a href="{% url 'estado_facturas' %}" class="nav-link {% if active_tab == 'index' %}active{% endif %}">
+          Historial<i class="fas fa-history"></i>
+      </a>
+  
   </nav>
 
 

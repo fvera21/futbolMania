@@ -4,23 +4,42 @@
 {% block css %}
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
   <style>
-      .estado-creada {
-          background-color: yellow;
-      }
-
-      .estado-rectificada {
-          background-color: orange;
-      }
-
-      .estado-entregada {
-          background-color: lightgreen;
-        
-      }
+    .estado-creada {
+        background-color: yellow;
+        border: 1px solid black;
+        color: black;
+    }
+    .estado-rectificada {
+        background-color: orange;
+        border: 1px solid black;
+        color: black;
+    }
+    .estado-entregada {
+        background-color: lightgreen;
+        border: 1px solid black;
+        color: black;
+    }
+    .estado-anulada {
+        background-color: red;
+        border: 1px solid black;
+        color: white;
+    }
+    .estado-desconocido {
+        background-color: gray;
+        border: 1px solid black;
+        color: white;
+    }
+    button {
+        pointer-events: auto;
+    }
+    button:hover {
+        background-color: inherit; /* Mantiene el color original */
+        border: 1px solid black; /* Mantiene el borde */
+    }
   </style>
 {% endblock %}
 
 {% block contenido %}
-
 <div class="container">
   <h1 class="text-center my-4">Listado de Facturas</h1>
   <table class="table table-striped">
@@ -34,12 +53,13 @@
               <th scope="col">Descuento</th>
               <th scope="col">IVA</th>
               <th scope="col">Total</th>
+              <th scope="col">Estado</th>
               <th scope="col"></th>
           </tr>
       </thead>
       <tbody>
         {% for factura in facturas %}
-        <tr class="{% if factura.estadoOrden.nombre == 'Creada' %}estado-creada{% elif factura.estadoOrden.nombre == 'Rectificada' %}estado-rectificada{% elif factura.estadoOrden.nombre == 'Entregada' %}estado-entregada{% endif %}">
+        <tr>
             <td>{{ factura.empresa }}</td>
             <td>{{ factura.vendedor }}</td>
             <td>{{ factura.cliente }}</td>
@@ -48,6 +68,11 @@
             <td>{{ factura.descuento }}%</td>
             <td>{{ factura.iva }}%</td>
             <td>{{ factura.total }}</td>
+            <td>
+                <button class="btn estado-{{ factura.estadoModificacion.nombre|lower }} btn-sm" style="pointer-events:none;">
+                    {{ factura.estadoModificacion.nombre|default:'Desconocido' }}
+                </button>
+            </td>
             <td><a href="{% url 'factura' factura.id %}" class="btn btn-primary btn-sm">Ver Más</a></td>
             <td><a href="{% url 'orden_compra_pdf' factura.id %}" class="btn btn-info">Exportar PDF</a></td>
         </tr>
@@ -58,7 +83,6 @@
 </div>
 
 {% endblock %}
-
 
 {% block js %}
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
