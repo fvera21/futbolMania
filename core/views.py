@@ -264,38 +264,26 @@ def rectificar(request, id):
         facturaForm = FacturaRectificarForm(request.POST, instance=factura, prefix='facturaForm')
         productoFormSet = ProductoFormSet(request.POST, queryset=productos, prefix='productos')
 
-        
-        if empresaForm.is_valid() and vendedorForm.is_valid() and clienteForm.is_valid() and envioForm.is_valid() and facturaForm.is_valid() and productoFormSet.is_valid():            # Crear instancias de los modelos con los datos del formulario
+        if empresaForm.is_valid() and vendedorForm.is_valid() and clienteForm.is_valid() and envioForm.is_valid() and facturaForm.is_valid() and productoFormSet.is_valid():
             empresaForm.save()
             vendedorForm.save()
             clienteForm.save()
             envioForm.save()
             productoFormSet.save()
 
-            #datos factura form
+            # Datos factura form
             descuento = facturaForm.cleaned_data.get('descuento')
             iva = facturaForm.cleaned_data.get('iva')
             costoenvio = facturaForm.cleaned_data.get('costoenvio')
 
+            subtotal = sum(form.cleaned_data.get('precio') * form.cleaned_data.get('cantidad') for form in productoFormSet)
+
             # Calculos
-            subtotal = 0  # Inicializa el subtotal
-
-            # Iterar sobre cada formulario en el formset para acceder a los datos de los productos
-            for form in productoFormSet:
-                producto_data = form.cleaned_data
-                precio = producto_data.get('precio')
-                cantidad = producto_data.get('cantidad')
-                monto = precio * cantidad
-                subtotal += monto
-                form.instance.monto = monto  # Actualiza el monto en el modelo Producto
-                form.save()
-
-            #calculos
-            descuentoMonto = subtotal * (descuento/100)
-            ivaMonto = (subtotal - descuentoMonto) * (iva/100)
+            descuentoMonto = subtotal * (descuento / 100)
+            ivaMonto = (subtotal - descuentoMonto) * (iva / 100)
             total = subtotal - descuentoMonto + ivaMonto + costoenvio
 
-            #actualizar factura
+            # Actualizar factura
             factura.subtotal = subtotal
             factura.descuento = descuento
             factura.descuentoMonto = descuentoMonto
@@ -303,10 +291,9 @@ def rectificar(request, id):
             factura.ivaMonto = ivaMonto
             factura.costoenvio = costoenvio
             factura.total = total
-            # cambiar estado
             factura.estadoModificacion = EstadoModificacion.objects.get(pk=2)
 
-            #guardar factura
+            # Guardar factura
             factura.save()
 
             return redirect('factura', id=factura.id)
@@ -318,8 +305,6 @@ def rectificar(request, id):
         facturaForm = FacturaRectificarForm(instance=factura, prefix='facturaForm')
         productoFormSet = ProductoFormSet(queryset=productos, prefix='productos')
 
-
-    
     return render(request, 'core/rectificar.html', {
         'empresaForm': empresaForm,
         'vendedorForm': vendedorForm,
@@ -329,6 +314,26 @@ def rectificar(request, id):
         'productoFormSet': productoFormSet,
         'factura': factura
     })
+
+def agregar_producto(request, id):
+    factura = get_object_or_404(Factura, id=id)
+
+    if request.method == 'POST':
+        form = ProductoRectificarForm(request.POST)
+        if form.is_valid():
+            producto = form.save(commit=False)
+            producto.factura = factura
+            producto.save()
+            return redirect('rectificar', id=id)
+    else:
+        form = ProductoRectificarForm()
+
+    return render(request, 'core/agregar_producto.html', {'form': form, 'factura': factura})
+
+def eliminar_producto(request, id, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    producto.delete()
+    return redirect('rectificar', id=id)
 
 def entregar(request, id):
     factura = get_object_or_404(Factura, id=id)

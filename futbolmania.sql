@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-07-2024 a las 06:48:28
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 7.4.28
+-- Tiempo de generación: 16-07-2024 a las 21:41:36
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `futbolmania`
 --
-CREATE DATABASE IF NOT EXISTS `futbolmania` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `futbolmania`;
 
 -- --------------------------------------------------------
 
@@ -29,11 +27,10 @@ USE `futbolmania`;
 -- Estructura de tabla para la tabla `auth_group`
 --
 
-DROP TABLE IF EXISTS `auth_group`;
 CREATE TABLE `auth_group` (
   `id` int(11) NOT NULL,
   `name` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -41,12 +38,11 @@ CREATE TABLE `auth_group` (
 -- Estructura de tabla para la tabla `auth_group_permissions`
 --
 
-DROP TABLE IF EXISTS `auth_group_permissions`;
 CREATE TABLE `auth_group_permissions` (
   `id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL,
   `permission_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -54,13 +50,12 @@ CREATE TABLE `auth_group_permissions` (
 -- Estructura de tabla para la tabla `auth_permission`
 --
 
-DROP TABLE IF EXISTS `auth_permission`;
 CREATE TABLE `auth_permission` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `content_type_id` int(11) NOT NULL,
   `codename` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `auth_permission`
@@ -134,7 +129,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (65, 'Can add rechazo', 17, 'add_rechazo'),
 (66, 'Can change rechazo', 17, 'change_rechazo'),
 (67, 'Can delete rechazo', 17, 'delete_rechazo'),
-(68, 'Can view rechazo', 17, 'view_rechazo');
+(68, 'Can view rechazo', 17, 'view_rechazo'),
+(69, 'Can add historial estado', 18, 'add_historialestado'),
+(70, 'Can change historial estado', 18, 'change_historialestado'),
+(71, 'Can delete historial estado', 18, 'delete_historialestado'),
+(72, 'Can view historial estado', 18, 'view_historialestado');
 
 -- --------------------------------------------------------
 
@@ -142,7 +141,6 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 -- Estructura de tabla para la tabla `auth_user`
 --
 
-DROP TABLE IF EXISTS `auth_user`;
 CREATE TABLE `auth_user` (
   `id` int(11) NOT NULL,
   `password` varchar(128) NOT NULL,
@@ -155,14 +153,14 @@ CREATE TABLE `auth_user` (
   `is_staff` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `date_joined` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `auth_user`
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$216000$thboMtj2k4pg$BpeorO5TA4UmOUKnseZEJoS59ZEEI1HYZv8cowaTJ9o=', '2024-07-04 03:20:47.588956', 1, 'admin', '', '', 'ig.riffo@duocuc.cl', 1, 1, '2024-06-05 02:37:04.959240'),
+(1, 'pbkdf2_sha256$216000$thboMtj2k4pg$BpeorO5TA4UmOUKnseZEJoS59ZEEI1HYZv8cowaTJ9o=', '2024-07-16 02:55:19.560851', 1, 'admin', '', '', 'ig.riffo@duocuc.cl', 1, 1, '2024-06-05 02:37:04.959240'),
 (2, 'pbkdf2_sha256$216000$miLzeQaeDRC7$NoLyHFIkVCvCTbyfzZYzOEM5wZg/Lo+c3S3B72PjID4=', '2024-06-06 02:35:30.409482', 0, 'ignacio', '', '', 'ignacio@gmail.com', 0, 1, '2024-06-06 02:35:29.917781');
 
 -- --------------------------------------------------------
@@ -171,12 +169,11 @@ INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `userna
 -- Estructura de tabla para la tabla `auth_user_groups`
 --
 
-DROP TABLE IF EXISTS `auth_user_groups`;
 CREATE TABLE `auth_user_groups` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -184,12 +181,11 @@ CREATE TABLE `auth_user_groups` (
 -- Estructura de tabla para la tabla `auth_user_user_permissions`
 --
 
-DROP TABLE IF EXISTS `auth_user_user_permissions`;
 CREATE TABLE `auth_user_user_permissions` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `permission_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -197,7 +193,6 @@ CREATE TABLE `auth_user_user_permissions` (
 -- Estructura de tabla para la tabla `core_cliente`
 --
 
-DROP TABLE IF EXISTS `core_cliente`;
 CREATE TABLE `core_cliente` (
   `id` int(11) NOT NULL,
   `nombrecliente` varchar(100) NOT NULL,
@@ -205,7 +200,7 @@ CREATE TABLE `core_cliente` (
   `direccion` varchar(200) NOT NULL,
   `telefono` varchar(15) NOT NULL,
   `correo` varchar(254) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `core_cliente`
@@ -230,7 +225,6 @@ INSERT INTO `core_cliente` (`id`, `nombrecliente`, `nombreEmpresa`, `direccion`,
 -- Estructura de tabla para la tabla `core_empresa`
 --
 
-DROP TABLE IF EXISTS `core_empresa`;
 CREATE TABLE `core_empresa` (
   `id` int(11) NOT NULL,
   `nombreEmpresa` varchar(100) NOT NULL,
@@ -238,7 +232,7 @@ CREATE TABLE `core_empresa` (
   `telefono` varchar(15) NOT NULL,
   `correo` varchar(254) NOT NULL,
   `web` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `core_empresa`
@@ -265,13 +259,12 @@ INSERT INTO `core_empresa` (`id`, `nombreEmpresa`, `direccion`, `telefono`, `cor
 -- Estructura de tabla para la tabla `core_entrega`
 --
 
-DROP TABLE IF EXISTS `core_entrega`;
 CREATE TABLE `core_entrega` (
   `id` int(11) NOT NULL,
   `direccion` varchar(200) DEFAULT NULL,
   `rut` varchar(15) DEFAULT NULL,
   `imagen` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `core_entrega`
@@ -279,7 +272,8 @@ CREATE TABLE `core_entrega` (
 
 INSERT INTO `core_entrega` (`id`, `direccion`, `rut`, `imagen`) VALUES
 (7, 'Av las nieves 02196', '20452245-9', 'bodega.jpg'),
-(8, 'Av concha y toro 2142', '20435234-2', '955e7690f1ee02b264dd2bdf6faace06.jpeg');
+(8, 'Av concha y toro 2142', '20435234-2', '955e7690f1ee02b264dd2bdf6faace06.jpeg'),
+(9, 'jshaksa', 'klkwjkwqe|jlwdk', '');
 
 -- --------------------------------------------------------
 
@@ -287,13 +281,12 @@ INSERT INTO `core_entrega` (`id`, `direccion`, `rut`, `imagen`) VALUES
 -- Estructura de tabla para la tabla `core_envio`
 --
 
-DROP TABLE IF EXISTS `core_envio`;
 CREATE TABLE `core_envio` (
   `id` int(11) NOT NULL,
   `metodoenvio` varchar(100) DEFAULT NULL,
   `direccionenvio` varchar(200) NOT NULL,
   `condicionesenvio` varchar(500) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `core_envio`
@@ -305,7 +298,7 @@ INSERT INTO `core_envio` (`id`, `metodoenvio`, `direccionenvio`, `condicionesenv
 (15, 'Starken', 'Av concha y toro 2142', 'No entregar antes de las 11am'),
 (16, 'Chilexpress', 'Av concha y toro 2142', 'entrega entre 8am y 10pm'),
 (17, NULL, 'Av concha y toro 2142', NULL),
-(18, NULL, 'Av concha y toro 2142', NULL),
+(18, 'deliveyr', 'Av concha y toro 2142', NULL),
 (19, 'Starken', 'Av mexico 2390', 'No entregar antes de las 11am'),
 (20, 'Starken', 'Av concha y toro 2142', 'No entregar antes de las 11am'),
 (21, 'Starken', 'Av concha y toro 2142', 'No entregar antes de las 11am'),
@@ -318,11 +311,10 @@ INSERT INTO `core_envio` (`id`, `metodoenvio`, `direccionenvio`, `condicionesenv
 -- Estructura de tabla para la tabla `core_estadoenvio`
 --
 
-DROP TABLE IF EXISTS `core_estadoenvio`;
 CREATE TABLE `core_estadoenvio` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `core_estadoenvio`
@@ -339,11 +331,10 @@ INSERT INTO `core_estadoenvio` (`id`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `core_estadomodificacion`
 --
 
-DROP TABLE IF EXISTS `core_estadomodificacion`;
 CREATE TABLE `core_estadomodificacion` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `core_estadomodificacion`
@@ -351,7 +342,8 @@ CREATE TABLE `core_estadomodificacion` (
 
 INSERT INTO `core_estadomodificacion` (`id`, `nombre`) VALUES
 (1, 'Creada'),
-(2, 'Rectificada');
+(2, 'Rectificada'),
+(3, 'Anulada');
 
 -- --------------------------------------------------------
 
@@ -359,11 +351,10 @@ INSERT INTO `core_estadomodificacion` (`id`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `core_estadoorden`
 --
 
-DROP TABLE IF EXISTS `core_estadoorden`;
 CREATE TABLE `core_estadoorden` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `core_estadoorden`
@@ -379,7 +370,6 @@ INSERT INTO `core_estadoorden` (`id`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `core_factura`
 --
 
-DROP TABLE IF EXISTS `core_factura`;
 CREATE TABLE `core_factura` (
   `id` int(11) NOT NULL,
   `subtotal` int(11) DEFAULT NULL,
@@ -393,21 +383,35 @@ CREATE TABLE `core_factura` (
   `empresa_id` int(11) DEFAULT NULL,
   `envio_id` int(11) DEFAULT NULL,
   `vendedor_id` int(11) DEFAULT NULL,
-  `estadoEnvio_id` int(11),
-  `estadoModificacion_id` int(11),
-  `estadoOrden_id` int(11),
-  `entrega_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `estadoEnvio_id` int(11) DEFAULT NULL,
+  `estadoModificacion_id` int(11) DEFAULT NULL,
+  `estadoOrden_id` int(11) DEFAULT NULL,
+  `entrega_id` int(11) DEFAULT NULL,
+  `anulada` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `core_factura`
 --
 
-INSERT INTO `core_factura` (`id`, `subtotal`, `descuento`, `descuentoMonto`, `iva`, `ivaMonto`, `costoenvio`, `total`, `cliente_id`, `empresa_id`, `envio_id`, `vendedor_id`, `estadoEnvio_id`, `estadoModificacion_id`, `estadoOrden_id`, `entrega_id`) VALUES
-(14, 25800, 10, 2580, 19, 4411, 3000, 30631, 18, 21, 18, 17, 1, 2, 1, NULL),
-(16, 199940, 5, 9997, 19, 36089, 6000, 232032, 20, 23, 20, 19, 3, 1, 2, NULL),
-(17, 384000, 12, 46080, 19, 64205, 20000, 422125, 22, 25, 22, 21, 2, 1, 2, 7),
-(18, 2033700, 12, 244044, 21, 375827, 34000, 2199483, 23, 26, 23, 22, 2, 2, 2, 8);
+INSERT INTO `core_factura` (`id`, `subtotal`, `descuento`, `descuentoMonto`, `iva`, `ivaMonto`, `costoenvio`, `total`, `cliente_id`, `empresa_id`, `envio_id`, `vendedor_id`, `estadoEnvio_id`, `estadoModificacion_id`, `estadoOrden_id`, `entrega_id`, `anulada`) VALUES
+(14, 25800, 10, 2580, 19, 4411, 3000, 30631, 18, 21, 18, 17, 2, 2, 2, 9, 0),
+(16, 199940, 5, 9997, 19, 36089, 6000, 232032, 20, 23, 20, 19, 3, 1, 2, NULL, 0),
+(17, 384000, 12, 46080, 19, 64204, 20000, 422124, 22, 25, 22, 21, 2, 2, 1, 7, 1),
+(18, 2033700, 12, 244044, 21, 375827, 34000, 2199483, 23, 26, 23, 22, 2, 2, 2, 8, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `core_historialestado`
+--
+
+CREATE TABLE `core_historialestado` (
+  `id` int(11) NOT NULL,
+  `fecha` datetime(6) NOT NULL,
+  `estado_id` int(11) DEFAULT NULL,
+  `factura_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -415,7 +419,6 @@ INSERT INTO `core_factura` (`id`, `subtotal`, `descuento`, `descuentoMonto`, `iv
 -- Estructura de tabla para la tabla `core_producto`
 --
 
-DROP TABLE IF EXISTS `core_producto`;
 CREATE TABLE `core_producto` (
   `id` int(11) NOT NULL,
   `codigo` varchar(100) NOT NULL,
@@ -424,7 +427,7 @@ CREATE TABLE `core_producto` (
   `precio` int(11) NOT NULL,
   `monto` int(11) NOT NULL,
   `factura_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `core_producto`
@@ -444,12 +447,11 @@ INSERT INTO `core_producto` (`id`, `codigo`, `descripcion`, `cantidad`, `precio`
 -- Estructura de tabla para la tabla `core_rechazo`
 --
 
-DROP TABLE IF EXISTS `core_rechazo`;
 CREATE TABLE `core_rechazo` (
   `id` int(11) NOT NULL,
   `descripcion` longtext DEFAULT NULL,
   `factura_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `core_rechazo`
@@ -469,7 +471,6 @@ INSERT INTO `core_rechazo` (`id`, `descripcion`, `factura_id`) VALUES
 -- Estructura de tabla para la tabla `core_vendedor`
 --
 
-DROP TABLE IF EXISTS `core_vendedor`;
 CREATE TABLE `core_vendedor` (
   `id` int(11) NOT NULL,
   `nombreEmpresa` varchar(100) NOT NULL,
@@ -477,7 +478,7 @@ CREATE TABLE `core_vendedor` (
   `telefono` varchar(15) NOT NULL,
   `correo` varchar(254) NOT NULL,
   `web` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `core_vendedor`
@@ -502,7 +503,6 @@ INSERT INTO `core_vendedor` (`id`, `nombreEmpresa`, `direccion`, `telefono`, `co
 -- Estructura de tabla para la tabla `django_admin_log`
 --
 
-DROP TABLE IF EXISTS `django_admin_log`;
 CREATE TABLE `django_admin_log` (
   `id` int(11) NOT NULL,
   `action_time` datetime(6) NOT NULL,
@@ -512,7 +512,7 @@ CREATE TABLE `django_admin_log` (
   `change_message` longtext NOT NULL,
   `content_type_id` int(11) DEFAULT NULL,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `django_admin_log`
@@ -612,12 +612,11 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 -- Estructura de tabla para la tabla `django_content_type`
 --
 
-DROP TABLE IF EXISTS `django_content_type`;
 CREATE TABLE `django_content_type` (
   `id` int(11) NOT NULL,
   `app_label` varchar(100) NOT NULL,
   `model` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `django_content_type`
@@ -637,6 +636,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (14, 'core', 'estadomodificacion'),
 (15, 'core', 'estadoorden'),
 (10, 'core', 'factura'),
+(18, 'core', 'historialestado'),
 (11, 'core', 'producto'),
 (17, 'core', 'rechazo'),
 (12, 'core', 'vendedor'),
@@ -648,13 +648,12 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 -- Estructura de tabla para la tabla `django_migrations`
 --
 
-DROP TABLE IF EXISTS `django_migrations`;
 CREATE TABLE `django_migrations` (
   `id` int(11) NOT NULL,
   `app` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `django_migrations`
@@ -690,7 +689,9 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (27, 'core', '0009_auto_20240702_1335', '2024-07-02 17:35:43.843548'),
 (28, 'core', '0010_auto_20240703_0109', '2024-07-03 05:09:16.473477'),
 (29, 'core', '0011_auto_20240703_0118', '2024-07-03 05:18:31.530341'),
-(30, 'core', '0012_auto_20240704_0014', '2024-07-04 04:15:04.670104');
+(30, 'core', '0012_auto_20240704_0014', '2024-07-04 04:15:04.670104'),
+(31, 'core', '0013_factura_anulada', '2024-07-16 03:10:51.955669'),
+(32, 'core', '0014_historialestado', '2024-07-16 03:48:02.300264');
 
 -- --------------------------------------------------------
 
@@ -698,12 +699,11 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 -- Estructura de tabla para la tabla `django_session`
 --
 
-DROP TABLE IF EXISTS `django_session`;
 CREATE TABLE `django_session` (
   `session_key` varchar(40) NOT NULL,
   `session_data` longtext NOT NULL,
   `expire_date` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `django_session`
@@ -711,6 +711,7 @@ CREATE TABLE `django_session` (
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 ('4vvn7sk75btzarp0qvjprahuc6luwc3v', '.eJxVjDsOwjAQBe_iGlm7Xq8_lPScwfJPOIAcKU4qxN0hUgpo38y8lwhxW1vYRl3CVMRZKHH63VLMj9p3UO6x32aZ574uU5K7Ig865HUu9Xk53L-DFkf71jZ5JOcVEXtWTKwSFe01AzAzIJlkUGeEioDOoq1UrWGno9EIoMT7A3vHNPE:1sF2yQ:TZVA30xHQ-TI2MIXVrHtSPv2_AKKg0M8D_TrAr0myns', '2024-06-20 02:35:30.424952'),
+('n9fg63yo7ejupu282z149of5rk28earr', '.eJxVjEEOwiAQRe_C2pAyg0Bduu8ZyAxMpWpoUtqV8e7apAvd_vfef6lI21ri1mSJU1YXZdTpd2NKD6k7yHeqt1mnua7LxHpX9EGbHuYsz-vh_h0UauVbMzAAYAIImEYXPHk26IDFBWvF9mjEnoWoG4MJ1HnnvDUZkZBTCr16fwDH1Tc4:1sTYLX:Y8jReZh4Qw8ezN3YTwyC63huOTHbXnPK-1os-Q8c0qs', '2024-07-30 02:55:19.564191'),
 ('pvhkwpubnqb7d9p6mrc7u5p0u2j0kvgo', '.eJxVjEEOwiAQRe_C2pAyg0Bduu8ZyAxMpWpoUtqV8e7apAvd_vfef6lI21ri1mSJU1YXZdTpd2NKD6k7yHeqt1mnua7LxHpX9EGbHuYsz-vh_h0UauVbMzAAYAIImEYXPHk26IDFBWvF9mjEnoWoG4MJ1HnnvDUZkZBTCr16fwDH1Tc4:1sPD1b:LxNjK6KCLTTOPG_jxs5xlxpm2v74vHAmJtCX5AO2EdM', '2024-07-18 03:20:47.588956');
 
 --
@@ -819,6 +820,14 @@ ALTER TABLE `core_factura`
   ADD KEY `core_factura_estadoOrden_id_39bdcb88_fk_core_estadoorden_id` (`estadoOrden_id`);
 
 --
+-- Indices de la tabla `core_historialestado`
+--
+ALTER TABLE `core_historialestado`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `core_historialestado_estado_id_52ffb789_fk_core_estadoorden_id` (`estado_id`),
+  ADD KEY `core_historialestado_factura_id_3220a976_fk_core_factura_id` (`factura_id`);
+
+--
 -- Indices de la tabla `core_producto`
 --
 ALTER TABLE `core_producto`
@@ -886,7 +895,7 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT de la tabla `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT de la tabla `auth_user`
@@ -922,7 +931,7 @@ ALTER TABLE `core_empresa`
 -- AUTO_INCREMENT de la tabla `core_entrega`
 --
 ALTER TABLE `core_entrega`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `core_envio`
@@ -940,7 +949,7 @@ ALTER TABLE `core_estadoenvio`
 -- AUTO_INCREMENT de la tabla `core_estadomodificacion`
 --
 ALTER TABLE `core_estadomodificacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `core_estadoorden`
@@ -953,6 +962,12 @@ ALTER TABLE `core_estadoorden`
 --
 ALTER TABLE `core_factura`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT de la tabla `core_historialestado`
+--
+ALTER TABLE `core_historialestado`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `core_producto`
@@ -982,13 +997,13 @@ ALTER TABLE `django_admin_log`
 -- AUTO_INCREMENT de la tabla `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- Restricciones para tablas volcadas
@@ -1033,6 +1048,13 @@ ALTER TABLE `core_factura`
   ADD CONSTRAINT `core_factura_estadoModificacion_i_7f3ff288_fk_core_esta` FOREIGN KEY (`estadoModificacion_id`) REFERENCES `core_estadomodificacion` (`id`),
   ADD CONSTRAINT `core_factura_estadoOrden_id_39bdcb88_fk_core_estadoorden_id` FOREIGN KEY (`estadoOrden_id`) REFERENCES `core_estadoorden` (`id`),
   ADD CONSTRAINT `core_factura_vendedor_id_d88fa5c3_fk_core_vendedor_id` FOREIGN KEY (`vendedor_id`) REFERENCES `core_vendedor` (`id`);
+
+--
+-- Filtros para la tabla `core_historialestado`
+--
+ALTER TABLE `core_historialestado`
+  ADD CONSTRAINT `core_historialestado_estado_id_52ffb789_fk_core_estadoorden_id` FOREIGN KEY (`estado_id`) REFERENCES `core_estadoorden` (`id`),
+  ADD CONSTRAINT `core_historialestado_factura_id_3220a976_fk_core_factura_id` FOREIGN KEY (`factura_id`) REFERENCES `core_factura` (`id`);
 
 --
 -- Filtros para la tabla `core_producto`

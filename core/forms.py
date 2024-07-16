@@ -17,14 +17,12 @@ class EmpresaForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(EmpresaForm, self).__init__(*args, **kwargs)
-        # Establecer valores predeterminados
         self.fields['nombreEmpresa'].initial = 'FutbolManía'
         self.fields['direccion'].initial = 'Av las nieves 02196'
         self.fields['telefono'].initial = '972834932'
         self.fields['correo'].initial = 'futbolmania@gmail.com'
         self.fields['web'].initial = 'www.futbolmania.com'
         
-        # Hacer todos los campos de solo lectura
         for field in self.fields.values():
             field.disabled = True
 
@@ -61,7 +59,6 @@ class EstadosForm(forms.ModelForm):
         super(EstadosForm, self).__init__(*args, **kwargs)
         self.fields['estadoModificacion'].disabled = True
 
-
 class EmpresaRectificarForm(forms.ModelForm):
     class Meta:
         model = Empresa
@@ -73,7 +70,6 @@ class EmpresaRectificarForm(forms.ModelForm):
             'correo': 'Correo',
             'web': 'Sitio Web',
         }
-    
 
 class VendedorRectificarForm(forms.ModelForm):
     class Meta:
@@ -86,7 +82,6 @@ class VendedorRectificarForm(forms.ModelForm):
             'correo': 'Correo',
             'web': 'Sitio Web',
         }
-
 
 class ClienteRectificarForm(forms.ModelForm):
     class Meta:
@@ -126,17 +121,22 @@ class FacturaRectificarForm(forms.ModelForm):
         }
 
 class ProductoRectificarForm(forms.ModelForm):
-    monto = forms.CharField(widget=forms.HiddenInput())  # Define el campo monto como oculto
-
     class Meta:
         model = Producto
-        fields = ['codigo', 'descripcion', 'cantidad', 'precio', 'monto']
+        fields = ['codigo', 'descripcion', 'cantidad', 'precio']
         labels = {
-            'codigo': 'Codigo',
+            'codigo': 'Código',
             'descripcion': 'Descripción',
             'cantidad': 'Cantidad',
             'precio': 'Precio',
         }
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.monto = instance.precio * instance.cantidad  # Calcula el monto
+        if commit:
+            instance.save()
+        return instance
 
 class EntregaForm(forms.ModelForm):
     class Meta:
