@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-07-2024 a las 21:46:46
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Tiempo de generación: 17-07-2024 a las 00:43:50
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 7.4.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS `auth_group`;
 CREATE TABLE `auth_group` (
   `id` int(11) NOT NULL,
   `name` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -46,7 +46,7 @@ CREATE TABLE `auth_group_permissions` (
   `id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL,
   `permission_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -60,7 +60,7 @@ CREATE TABLE `auth_permission` (
   `name` varchar(255) NOT NULL,
   `content_type_id` int(11) NOT NULL,
   `codename` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `auth_permission`
@@ -159,14 +159,14 @@ CREATE TABLE `auth_user` (
   `is_staff` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `date_joined` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `auth_user`
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$216000$thboMtj2k4pg$BpeorO5TA4UmOUKnseZEJoS59ZEEI1HYZv8cowaTJ9o=', '2024-07-16 02:55:19.560851', 1, 'admin', '', '', 'ig.riffo@duocuc.cl', 1, 1, '2024-06-05 02:37:04.959240'),
+(1, 'pbkdf2_sha256$216000$thboMtj2k4pg$BpeorO5TA4UmOUKnseZEJoS59ZEEI1HYZv8cowaTJ9o=', '2024-07-16 19:52:56.140255', 1, 'admin', '', '', 'ig.riffo@duocuc.cl', 1, 1, '2024-06-05 02:37:04.959240'),
 (2, 'pbkdf2_sha256$216000$miLzeQaeDRC7$NoLyHFIkVCvCTbyfzZYzOEM5wZg/Lo+c3S3B72PjID4=', '2024-06-06 02:35:30.409482', 0, 'ignacio', '', '', 'ignacio@gmail.com', 0, 1, '2024-06-06 02:35:29.917781');
 
 -- --------------------------------------------------------
@@ -180,7 +180,7 @@ CREATE TABLE `auth_user_groups` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -193,7 +193,7 @@ CREATE TABLE `auth_user_user_permissions` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `permission_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -209,7 +209,7 @@ CREATE TABLE `core_cliente` (
   `direccion` varchar(200) NOT NULL,
   `telefono` varchar(15) NOT NULL,
   `correo` varchar(254) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `core_cliente`
@@ -226,7 +226,9 @@ INSERT INTO `core_cliente` (`id`, `nombrecliente`, `nombreEmpresa`, `direccion`,
 (20, 'Fabian Bravo', '100% Futbol', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com'),
 (21, 'Francisco Vera', '100% Futbol', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com'),
 (22, 'Francisco Vera', '100% Futbol', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com'),
-(23, 'David Espinosa', 'DuocUC', 'Av concha y toro 2142', '927492043', 'duoc@gmail.com');
+(23, 'David Espinosa', 'DuocUC', 'Av concha y toro 2142', '927492043', 'duoc@gmail.com'),
+(24, 'David Espinosa', '100% Futbol', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com'),
+(25, 'David Espinosa', 'DuocUC', 'Av concha y toro 2142', '927492043', 'cliente@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -242,7 +244,7 @@ CREATE TABLE `core_empresa` (
   `telefono` varchar(15) NOT NULL,
   `correo` varchar(254) NOT NULL,
   `web` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `core_empresa`
@@ -261,7 +263,9 @@ INSERT INTO `core_empresa` (`id`, `nombreEmpresa`, `direccion`, `telefono`, `cor
 (23, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com'),
 (24, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com'),
 (25, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com'),
-(26, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com');
+(26, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com'),
+(27, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com'),
+(28, 'FutbolManía', 'Av las nieves 02196', '972834932', 'futbolmania@gmail.com', 'www.futbolmania.com');
 
 -- --------------------------------------------------------
 
@@ -275,7 +279,7 @@ CREATE TABLE `core_entrega` (
   `direccion` varchar(200) DEFAULT NULL,
   `rut` varchar(15) DEFAULT NULL,
   `imagen` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `core_entrega`
@@ -298,7 +302,7 @@ CREATE TABLE `core_envio` (
   `metodoenvio` varchar(100) DEFAULT NULL,
   `direccionenvio` varchar(200) NOT NULL,
   `condicionesenvio` varchar(500) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `core_envio`
@@ -315,7 +319,9 @@ INSERT INTO `core_envio` (`id`, `metodoenvio`, `direccionenvio`, `condicionesenv
 (20, 'Starken', 'Av concha y toro 2142', 'No entregar antes de las 11am'),
 (21, 'Starken', 'Av concha y toro 2142', 'No entregar antes de las 11am'),
 (22, 'Starken', 'Av concha y toro 2142', 'No entregar antes de las 11am'),
-(23, NULL, 'Av concha y toro 2142', NULL);
+(23, NULL, 'Av concha y toro 2142', NULL),
+(24, 'Starken', 'Av concha y toro 2142', 'No entregar antes de las 11am'),
+(25, 'Chilexpress', 'Av concha y toro 2142', 'No entregar antes de las 11am');
 
 -- --------------------------------------------------------
 
@@ -327,7 +333,7 @@ DROP TABLE IF EXISTS `core_estadoenvio`;
 CREATE TABLE `core_estadoenvio` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `core_estadoenvio`
@@ -348,7 +354,7 @@ DROP TABLE IF EXISTS `core_estadomodificacion`;
 CREATE TABLE `core_estadomodificacion` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `core_estadomodificacion`
@@ -369,7 +375,7 @@ DROP TABLE IF EXISTS `core_estadoorden`;
 CREATE TABLE `core_estadoorden` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `core_estadoorden`
@@ -404,17 +410,19 @@ CREATE TABLE `core_factura` (
   `estadoOrden_id` int(11) DEFAULT NULL,
   `entrega_id` int(11) DEFAULT NULL,
   `anulada` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `core_factura`
 --
 
 INSERT INTO `core_factura` (`id`, `subtotal`, `descuento`, `descuentoMonto`, `iva`, `ivaMonto`, `costoenvio`, `total`, `cliente_id`, `empresa_id`, `envio_id`, `vendedor_id`, `estadoEnvio_id`, `estadoModificacion_id`, `estadoOrden_id`, `entrega_id`, `anulada`) VALUES
-(14, 25800, 10, 2580, 19, 4411, 3000, 30631, 18, 21, 18, 17, 2, 2, 2, 9, 0),
-(16, 199940, 5, 9997, 19, 36089, 6000, 232032, 20, 23, 20, 19, 3, 1, 2, NULL, 0),
+(14, 25800, 10, 2580, 19, 4411, 3000, 30631, 18, 21, 18, 17, 2, 3, 2, 9, 0),
+(16, 199940, 5, 9997, 19, 36089, 6000, 232032, 20, 23, 20, 19, 3, 2, 2, NULL, 0),
 (17, 384000, 12, 46080, 19, 64204, 20000, 422124, 22, 25, 22, 21, 2, 2, 1, 7, 1),
-(18, 2033700, 12, 244044, 21, 375827, 34000, 2199483, 23, 26, 23, 22, 2, 2, 2, 8, 0);
+(18, 2033700, 12, 244044, 21, 375827, 34000, 2199483, 23, 26, 23, 22, 2, 2, 2, 8, 0),
+(19, 219860, 10, 21986, 19, 37596, 15000, 250470, 24, 27, 24, 23, 1, 3, 1, NULL, 0),
+(20, 314820, 5, 15741, 19, 56825, 12000, 367904, 25, 28, 25, 24, 1, 1, 1, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -428,7 +436,7 @@ CREATE TABLE `core_historialestado` (
   `fecha` datetime(6) NOT NULL,
   `estado_id` int(11) DEFAULT NULL,
   `factura_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -445,7 +453,7 @@ CREATE TABLE `core_producto` (
   `precio` int(11) NOT NULL,
   `monto` int(11) NOT NULL,
   `factura_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `core_producto`
@@ -457,7 +465,11 @@ INSERT INTO `core_producto` (`id`, `codigo`, `descripcion`, `cantidad`, `precio`
 (24, 'fsk9y', 'Zapatillas', 4, 39990, 159960, 16),
 (25, 'lsls', 'Camiseta', 32, 12000, 384000, 17),
 (26, '43adk', 'Conjunto Buzo', 12, 56990, 683880, 18),
-(27, 'fksa', 'Zapatillas', 18, 74990, 1349820, 18);
+(27, 'fksa', 'Zapatillas', 18, 74990, 1349820, 18),
+(33, 'dka1f', 'Camiseta', 2, 19990, 39980, 19),
+(35, 'fasdsa', 'Balón', 12, 14990, 179880, 19),
+(36, '43adk', 'Camiseta', 12, 19990, 239880, 20),
+(37, '42few', 'Balón', 6, 12490, 74940, 20);
 
 -- --------------------------------------------------------
 
@@ -470,7 +482,7 @@ CREATE TABLE `core_rechazo` (
   `id` int(11) NOT NULL,
   `descripcion` longtext DEFAULT NULL,
   `factura_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `core_rechazo`
@@ -498,7 +510,7 @@ CREATE TABLE `core_vendedor` (
   `telefono` varchar(15) NOT NULL,
   `correo` varchar(254) NOT NULL,
   `web` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `core_vendedor`
@@ -515,7 +527,9 @@ INSERT INTO `core_vendedor` (`id`, `nombreEmpresa`, `direccion`, `telefono`, `co
 (19, 'Falabella', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl'),
 (20, 'Falabella', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl'),
 (21, 'Falabella', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl'),
-(22, 'Paris', 'Av independencia 2132', '938293431', 'paris@gmail.com', 'www.paris.cl');
+(22, 'Paris', 'Av independencia 2132', '938293431', 'paris@gmail.com', 'www.paris.cl'),
+(23, 'Paris', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl'),
+(24, 'Falabella', 'Av independencia 2132', '938293431', 'vendedor@gmail.com', 'www.vendedor.cl');
 
 -- --------------------------------------------------------
 
@@ -533,7 +547,7 @@ CREATE TABLE `django_admin_log` (
   `change_message` longtext NOT NULL,
   `content_type_id` int(11) DEFAULT NULL,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `django_admin_log`
@@ -638,7 +652,7 @@ CREATE TABLE `django_content_type` (
   `id` int(11) NOT NULL,
   `app_label` varchar(100) NOT NULL,
   `model` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `django_content_type`
@@ -676,7 +690,7 @@ CREATE TABLE `django_migrations` (
   `app` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `django_migrations`
@@ -727,13 +741,14 @@ CREATE TABLE `django_session` (
   `session_key` varchar(40) NOT NULL,
   `session_data` longtext NOT NULL,
   `expire_date` datetime(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `django_session`
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('4alzxxvyoutp4nilhqcz3wkjx9u80gm7', '.eJxVjEEOwiAQRe_C2pAyg0Bduu8ZyAxMpWpoUtqV8e7apAvd_vfef6lI21ri1mSJU1YXZdTpd2NKD6k7yHeqt1mnua7LxHpX9EGbHuYsz-vh_h0UauVbMzAAYAIImEYXPHk26IDFBWvF9mjEnoWoG4MJ1HnnvDUZkZBTCr16fwDH1Tc4:1sToEK:ZYlF3G22sAxXDGDlQeQyEaMb1zrqdfzp7s7SwTlCfEQ', '2024-07-30 19:52:56.140255'),
 ('4vvn7sk75btzarp0qvjprahuc6luwc3v', '.eJxVjDsOwjAQBe_iGlm7Xq8_lPScwfJPOIAcKU4qxN0hUgpo38y8lwhxW1vYRl3CVMRZKHH63VLMj9p3UO6x32aZ574uU5K7Ig865HUu9Xk53L-DFkf71jZ5JOcVEXtWTKwSFe01AzAzIJlkUGeEioDOoq1UrWGno9EIoMT7A3vHNPE:1sF2yQ:TZVA30xHQ-TI2MIXVrHtSPv2_AKKg0M8D_TrAr0myns', '2024-06-20 02:35:30.424952'),
 ('n9fg63yo7ejupu282z149of5rk28earr', '.eJxVjEEOwiAQRe_C2pAyg0Bduu8ZyAxMpWpoUtqV8e7apAvd_vfef6lI21ri1mSJU1YXZdTpd2NKD6k7yHeqt1mnua7LxHpX9EGbHuYsz-vh_h0UauVbMzAAYAIImEYXPHk26IDFBWvF9mjEnoWoG4MJ1HnnvDUZkZBTCr16fwDH1Tc4:1sTYLX:Y8jReZh4Qw8ezN3YTwyC63huOTHbXnPK-1os-Q8c0qs', '2024-07-30 02:55:19.564191'),
 ('pvhkwpubnqb7d9p6mrc7u5p0u2j0kvgo', '.eJxVjEEOwiAQRe_C2pAyg0Bduu8ZyAxMpWpoUtqV8e7apAvd_vfef6lI21ri1mSJU1YXZdTpd2NKD6k7yHeqt1mnua7LxHpX9EGbHuYsz-vh_h0UauVbMzAAYAIImEYXPHk26IDFBWvF9mjEnoWoG4MJ1HnnvDUZkZBTCr16fwDH1Tc4:1sPD1b:LxNjK6KCLTTOPG_jxs5xlxpm2v74vHAmJtCX5AO2EdM', '2024-07-18 03:20:47.588956');
@@ -943,13 +958,13 @@ ALTER TABLE `auth_user_user_permissions`
 -- AUTO_INCREMENT de la tabla `core_cliente`
 --
 ALTER TABLE `core_cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `core_empresa`
 --
 ALTER TABLE `core_empresa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `core_entrega`
@@ -961,7 +976,7 @@ ALTER TABLE `core_entrega`
 -- AUTO_INCREMENT de la tabla `core_envio`
 --
 ALTER TABLE `core_envio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `core_estadoenvio`
@@ -985,7 +1000,7 @@ ALTER TABLE `core_estadoorden`
 -- AUTO_INCREMENT de la tabla `core_factura`
 --
 ALTER TABLE `core_factura`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `core_historialestado`
@@ -997,7 +1012,7 @@ ALTER TABLE `core_historialestado`
 -- AUTO_INCREMENT de la tabla `core_producto`
 --
 ALTER TABLE `core_producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `core_rechazo`
@@ -1009,7 +1024,7 @@ ALTER TABLE `core_rechazo`
 -- AUTO_INCREMENT de la tabla `core_vendedor`
 --
 ALTER TABLE `core_vendedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `django_admin_log`
